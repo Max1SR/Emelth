@@ -1,19 +1,47 @@
+import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import io from "socket.io-client";
 
+const socket = io.connect("http://192.168.20.243:3001");
 const inter = Inter({ subsets: ["latin"] });
 
+
+
 export default function gestionPeticiones() {
-  
+  const [requests, setRequests] = useState([]);
+  const handleReceiveMessage = (data) => {
+    let request1 = data.message;
+    console.log(request1);
+
+    switch (request1.Type) {
+      case "request":
+        setRequests((prevRequests) => [...prevRequests, request1]);
+        break;
+      default:
+        break;
+    }
+  };
+  useEffect(() => {
+    socket.on("recieve_message", handleReceiveMessage);
+    socket.on("server_message", (data) => {
+      console.log(data);
+    });
+    return () => {
+      socket.off("recieve_message", handleReceiveMessage);
+      console.log("Unsubscribing from receive_message");
+      socket.off("server_message");
+    };
+  }, []); 
   const datosIniciales = [
     {
       Folio: "123DKSII",
       Name: "Juan",
       LastName: "Perez",
       LastName2: "Gonzalez",
-      Description: "No se qie ponerasdasfvsdgdfgdfgvdfgvdgvdgvdfgvdfgvdgvdasfsdfsdfsdfsdfsdffsdfsdfsd",
+      Description:
+        "No se qie ponerasdasfvsdgdfgdfgvdfgvdgvdgvdfgvdfgvdgvdasfsdfsdfsdfsdfsdffsdfsdfsd",
       Age: 30,
       Emergency: "C3",
       Sex: "Masculino",
@@ -93,7 +121,7 @@ export default function gestionPeticiones() {
                 max-md:[&_td]:border-b
                 max-md:[&_td:last-of-type]:border-none
                 [&_td]:border-slate-100
-"
+"         id="dTboor"
           >
             {/* Encabezado de tabla */}
             <thead>
@@ -128,39 +156,39 @@ export default function gestionPeticiones() {
 
             {/* Contenido de tabla */}
             <tbody>
-              {personas.map((persona, index) => (
+              {requests.map((request, index) => (
                 <tr>
                   {/* Folio */}
                   <td className="max-md:row-start-2 max-md:col-start-${index + 1}">
-                    {persona.Folio}
+                    {/* {persona.Folio} */}
                   </td>
                   {/* Nombre */}
                   <td className="max-md:row-start-4 max-md:col-start-${index + 1}">
-                    {persona.Name}
+                    {request.Name}
                   </td>
                   {/* Apellido Paterno */}
                   <td className="max-md:row-start-6 max-md:col-start-${index + 1}">
-                    {persona.LastName}
+                    {request.LastName}
                   </td>
                   {/* Apellido Materno */}
                   <td className="max-md:row-start-8 max-md:col-start-${index + 1}">
-                    {persona.LastName2}
+                    {request.LastName2}
                   </td>
                   {/* Edad */}
                   <td className="max-md:row-start-10 max-md:col-start-${index + 1}">
-                    {persona.Age}
+                    {request.Age}
                   </td>
                   {/* Sexo */}
                   <td className="max-md:row-start-12 max-md:col-start-${index + 1}">
-                    {persona.Sex}
+                    {request.Sex}
                   </td>
                   {/* Tipo de Emergencia */}
                   <td className="max-md:row-start-[14] max-md:col-start-${index + 1}">
-                    {persona.Emergency}
+                    {request.Emergency}
                   </td>
                   {/* Padecimiento */}
                   <td className="max-md:row-start-[16] max-md:col-start-${index + 1} break-all max-w-48">
-                    {persona.Description}
+                    {request.Description}
                   </td>
                   <td className="max-md:row-start-[18] max-md:col-start-${index + 1}">
                     <a
