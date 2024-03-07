@@ -1,30 +1,45 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import Layout from "@/components/layout";
+import Layout from "@/components/components_usu_no_registrado/layout";
 import { Inter } from "next/font/google";
 import io from "socket.io-client";
 
 const socket = io.connect("http://192.168.20.243:3001");
 const inter = Inter({ subsets: ["latin"] });
 
-
-
 export default function gestionPeticiones() {
   const [requests, setRequests] = useState([]);
+  function addRequestToState(request) {
+    setRequests((prevState) => [...prevState, request]);
+  }
+  const handleAcept = (index) => {
+    console.log(index, true);
+  };
+  const handleReject = (index) => {
+    console.log(index, false);
+  };
   const handleReceiveMessage = (data) => {
     let request1 = data.message;
     console.log(request1);
 
     switch (request1.Type) {
       case "request":
-        setRequests((prevRequests) => [...prevRequests, request1]);
+        addRequestToState(request1);
         break;
+
       default:
         break;
     }
   };
+  const handleRequests = (data) => {
+    console.log(data);
+    for (let index in data) {
+      addRequestToState(data[index]);
+    }
+  };
   useEffect(() => {
     socket.on("recieve_message", handleReceiveMessage);
+    socket.on("server_requests", handleRequests);
     socket.on("server_message", (data) => {
       console.log(data);
     });
@@ -32,43 +47,10 @@ export default function gestionPeticiones() {
       socket.off("recieve_message", handleReceiveMessage);
       console.log("Unsubscribing from receive_message");
       socket.off("server_message");
+      socket.off("server_requests");
     };
-  }, []); 
-  const datosIniciales = [
-    {
-      Folio: "123DKSII",
-      Name: "Juan",
-      LastName: "Perez",
-      LastName2: "Gonzalez",
-      Description:
-        "No se qie ponerasdasfvsdgdfgdfgvdfgvdgvdgvdfgvdfgvdgvdasfsdfsdfsdfsdfsdffsdfsdfsd",
-      Age: 30,
-      Emergency: "C3",
-      Sex: "Masculino",
-    },
-    {
-      Folio: "988GDAUSHD",
-      Name: "Max",
-      LastName: "Sanchez",
-      LastName2: "Gonzalez",
-      Description: "Ostia tio",
-      Age: 35,
-      Emergency: "C1",
-      Sex: "Masculino",
-    },
-    {
-      Folio: "986KMNDJSKA",
-      Name: "Maria",
-      LastName: "Juana",
-      LastName2: "Perez",
-      Description: "Hola hola hola hola hola hola ohola ola",
-      Age: 68,
-      Emergency: "C5",
-      Sex: "Femenino",
-    },
-  ];
+  }, []);
 
-  const [personas, setPersonas] = useState(datosIniciales);
   return (
     <Layout>
       <main
@@ -78,7 +60,6 @@ export default function gestionPeticiones() {
           <table
             className="
                 table-auto
-                
                 md:w-full
                 text-sm
                 snap-x
@@ -121,7 +102,8 @@ export default function gestionPeticiones() {
                 max-md:[&_td]:border-b
                 max-md:[&_td:last-of-type]:border-none
                 [&_td]:border-slate-100
-"         id="dTboor"
+"
+            id="dTboor"
           >
             {/* Encabezado de tabla */}
             <thead>
