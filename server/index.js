@@ -10,24 +10,26 @@ const unreadPetitions = {};
 let index = 0;
 const io = new Server(server, {
   cors: {
-    origin: "http://10.107.118.183:3000",
+    origin: "http://192.168.20.141:3000",
     methods: ["GET", "POST"],
   },
 });
 io.on("connection", (socket) => {
   let id = socket.id;
   connectedUsers[id] = id;
-
+  socket.join(id);
   data = {
     Type: "id",
     socketID: id,
   };
+  io.to(id).emit("server_message", data);
+
   console.log(connectedUsers);
   console.log(data);
   console.log(`User Connected ${id}`);
 
   socket.emit("server_requests", unreadPetitions);
-  socket.emit("server_message", data);
+
 
   socket.on("send_message", (data) => {
     console.log(data.message);
