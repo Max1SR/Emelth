@@ -4,14 +4,46 @@ import Cheems from "./img/cheems.jpg";
 
 export default function Carrusel() {
   const logos = [
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Facebook", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Disney", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Airbnb", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Apple", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Spark", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Samsung", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Quora", style: "none" },
-    { src: 'https://www.icegif.com/wp-content/uploads/2022/01/icegif-982.gif', alt: "Sass", style: "none" },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Facebook",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Disney",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Airbnb",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Apple",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Spark",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Samsung",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Quora",
+      style: "none",
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoxAWeRN1dPT9ZHJQXq-7GuHOzO0-NDkcMweWee8_uw&s",
+      alt: "Sass",
+      style: "none",
+    },
   ];
 
   return (

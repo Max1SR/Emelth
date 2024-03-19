@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Escudo from "./iconos/escudo";
 
@@ -65,7 +67,7 @@ export default function HeaderParam() {
     <header className="bg-white shadow text-slate-600">
       <div className="flex h-14 justify-between items-center px-20">
         <a href="/">
-            {/* Cambiar por el svg del logo a rehacer */}
+          {/* Cambiar por el svg del logo a rehacer */}
           <Escudo className="h-6 w-6"></Escudo>
         </a>
         {/* Lo siguiente muestra el icono de mdesplegar menu debido al lg:hidden ya que nos esta mencionandop que apartir de 1024px se esconde */}

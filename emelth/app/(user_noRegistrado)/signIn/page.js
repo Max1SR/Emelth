@@ -1,7 +1,6 @@
 import React from "react";
 import { Inter } from "next/font/google";
-import Layout from "@/components/components_usu_no_registrado/layout";
-import Header from "@/components/components_usu_no_registrado/header";
+
 import Escudo from "@/components/iconos/escudo";
 
 const inter = Inter({ subsets: ["latin"] });

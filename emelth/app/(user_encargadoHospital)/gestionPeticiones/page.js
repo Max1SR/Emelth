@@ -4,7 +4,7 @@ import Layout from "@/components/components_usu_no_registrado/layout";
 import { Inter } from "next/font/google";
 import io from "socket.io-client";
 
-const socket = io.connect("http://192.168.20.243:3001");
+const socket = io.connect("http://192.168.20.141:3001");
 const inter = Inter({ subsets: ["latin"] });
 
 export default function gestionPeticiones() {

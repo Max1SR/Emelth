@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Escudo from "../iconos/escudo";
 
@@ -88,36 +90,42 @@ export default function Header() {
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/nosotros"
             >
               Nosotros
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/maps"
+            >
+              Mapa
+            </Link>
+            <Link
+              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
+              href="/contacto"
             >
               Contacto
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/ayuda"
             >
               Ayuda
             </Link>
 
-            <button
+            <a
               className="text-slate-600 ml-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/signIn"
             >
               Sign in
-            </button>
+            </a>
             <span className="mx-2">|</span>
-            <button
+            <a
               className="text-slate-600   hover:text-sky-500 transition-colors"
-              href="/"
+              href="/signUp"
             >
               Sign up
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -148,25 +156,31 @@ export default function Header() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <a
-                  href="#"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Inicio
                 </a>
                 <a
-                  href="#"
+                  href="/nosotros"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Nosotros
                 </a>
                 <a
-                  href="#"
+                  href="/maps"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Mapa
+                </a>
+                <a
+                  href="/contacto"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Contacto
                 </a>
                 <a
-                  href="#"
+                  href="/ayuda"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Ayuda
@@ -174,14 +188,14 @@ export default function Header() {
               </div>
               <div className="py-6 space-x-1">
                 <a
-                  href="#"
+                  href="/singIn"
                   className="-ml-3  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Sign in
                 </a>
                 <span className="mx-6 text-slate-950">|</span>
                 <a
-                  href="#"
+                  href="/signUp"
                   className="-mx-3  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Sign up
