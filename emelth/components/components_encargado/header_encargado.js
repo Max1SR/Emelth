@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Escudo from "./iconos/escudo";
+import Escudo from "../iconos/escudo";
 
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
@@ -82,24 +82,24 @@ export default function HeaderParam() {
           </button>
         </div>
         <div className=" items-center hidden lg:flex justify-between ">
-          <div className="justify-between items-center">
+          <div className="justify-between items-center flex flex-row">
             <Link
-              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              className="text-slate-600 mr-6  hover:text-sky-500 transition-colors"
+              href="/home"
             >
-              Inicio
+              Home
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/gestionPeticiones"
             >
-              Registro de Peticiones
+              Gestion de Peticiones
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
+              href="/historialPeticiones"
             >
-              Contacto
+              Historial de Peticiones
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
@@ -108,18 +108,12 @@ export default function HeaderParam() {
               Ayuda
             </Link>
 
-            <button
-              className="text-slate-600 ml-6  hover:text-sky-500 transition-colors"
-              href="/"
-            >
-              Login
-            </button>
-            <span className="mx-2">|</span>
-            <button
-              className="text-slate-600   hover:text-sky-500 transition-colors"
-              href="/"
-            >
-              Sign in
+            <button className="ml-6">
+              <img
+                class="h-6 w-6 rounded-full"
+                src="https://ui-avatars.com/api?name=Max+Sanchez"
+                alt="Maximiliano Sanchez"
+              />
             </button>
           </div>
         </div>
@@ -179,22 +173,22 @@ export default function HeaderParam() {
                   )}
                 </Disclosure>
                 <a
-                  href="#"
+                  href="/home"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Pene
+                  Home
                 </a>
                 <a
-                  href="#"
+                  href="/gestionPeticiones"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  Gestion de Peticiones
                 </a>
                 <a
-                  href="#"
+                  href="/historialPeticiones"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  Historial de Peticiones
                 </a>
               </div>
               <div className="py-6">
@@ -202,7 +196,7 @@ export default function HeaderParam() {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Iniciar Sesion
+                  Mi Cuenta
                 </a>
               </div>
             </div>

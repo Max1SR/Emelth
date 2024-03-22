@@ -126,15 +126,13 @@ export default function gestionPeticiones() {
                   Tipo Emergencia
                 </th>
                 <th className="max-md:row-start-15 max-md:col-start-1">
-                  Padecimiento
+                  Estado
                 </th>
 
                 <th className="max-md:row-start-[17] max-md:col-start-1">
                   <span className="sr-only">Aceptar</span>
                 </th>
-                <th className="max-md:row-start-[19] max-md:col-start-1">
-                  <span className="sr-only">Rechazar</span>
-                </th>
+                
               </tr>
             </thead>
 
@@ -174,12 +172,14 @@ export default function gestionPeticiones() {
                   <td className="max-md:row-start-[16] max-md:col-start-${index + 1} break-all max-w-48">
                     {request.Description}
                   </td>
+
                   <td className="max-md:row-start-[18] max-md:col-start-${index + 1}">
                     <a
                       className="inline-flex justify-center items-center rounded-lg bg-green-500 px-2.5 py-1.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 hover:bg-indigo-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600 transition-colors duration-150 group"
                       href="#0"
                     >
-                      <span className="md:sr-only">Aceptar</span>
+                        {/* Aparecera segun si el estado es activo o culminado  */}
+                      <span className="md:sr-only">Activo</span>
                       <span className="tracking-normal text-white md:text-white group-hover:translate-x-0.5 transition-tran sform duration-150 ease-in-out max-md:ml-1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -195,32 +195,7 @@ export default function gestionPeticiones() {
                       </span>
                     </a>
                   </td>
-                  <td className="max-md:row-start-[20] max-md:col-start-${index + 1}">
-                    <a
-                      className="inline-flex justify-center items-center rounded-lg bg-red-500 px-2.5 py-1.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 hover:bg-indigo-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600 transition-colors duration-150 group"
-                      href="#0"
-                    >
-                      <span className="md:sr-only">Rechazar</span>
-                      <span className="tracking-normal text-white md:text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out max-md:ml-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 24 24"
-                          className=""
-                        >
-                          <g
-                            fill="currentColor"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                          >
-                            <path d="M5.47 5.47a.75.75 0 0 1 1.06 0l12 12a.75.75 0 1 1-1.06 1.06l-12-12a.75.75 0 0 1 0-1.06" />
-                            <path d="M18.53 5.47a.75.75 0 0 1 0 1.06l-12 12a.75.75 0 0 1-1.06-1.06l12-12a.75.75 0 0 1 1.06 0" />
-                          </g>
-                        </svg>
-                      </span>
-                    </a>
-                  </td>
+                  
                 </tr>
               ))}
             </tbody>
