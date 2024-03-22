@@ -19,9 +19,8 @@ export default function signin_signup() {
     console.log(password);
     await signIn("credentials"),
       {
-        username: username,
-        password: password,
-        redirect: true,
+        username:username,
+        password:password,
       };
   };
   const handleRegister = () => {
@@ -45,7 +44,7 @@ export default function signin_signup() {
       <main
         className={`items-center justify-between px-16 py-14 ${inter.className} h-[93vh] bg-slate-100 text-slate-800`}
       >
-        <div className="lg:flex flex-row h-full hidden">
+        <div className="flex flex-row h-full ">
           <div className="w-1/2 h-full bg-slate-200 p-24 px-32 rounded-l-3xl flex flex-col justify-center">
             <form className="space-y-8">
               <div className="flex flex-col space-y-2">
@@ -114,66 +113,6 @@ export default function signin_signup() {
               scelerisque pellentesque urna vel feugiat. Cras euismod hendrerit
               ligula, ut commodo massa volutpat eu. Donec at viverra nibh.
             </p>
-          </div>
-        </div>
-
-        {/* para pantallas peque;as */}
-        <div className="lg:hidden flex-row h-full w-8/12 m-auto">
-          <div className="w-full h-full bg-slate-200 p-24 px-1/6 rounded-3xl flex flex-col justify-center items-center">
-            <form className="space-y-8 flex flex-col w-11/12 h-full ">
-              <div className="flex flex-col space-y-2 items-center">
-                <h1 className="text-3xl font-semibold">Iniciar sesión</h1>
-                <p className="text-base font-medium text-slate-600">
-                  Bienvenido de nuevo
-                </p>
-              </div>
-              <div className="flex flex-col space-y-2 items-center">
-                <div className="form-heading">
-                  <p className="heading-input">Correo electrónico</p>
-                </div>
-                <input
-                  value={formData.username}
-                  onChange={(e) =>
-                    setFormData({ ...formData, username: e.target.value })
-                  }
-                  type="email"
-                  placeholder="Escriba su correo electrónico"
-                  className="h-9 rounded-md px-3 w-full"
-                />
-              </div>
-              <div className="flex flex-col space-y-2 items-center">
-                <div className="form-heading">
-                  <p className="heading-input">Contraseña</p>
-                </div>
-                <input
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  type="password"
-                  placeholder="Escriba su contraseña"
-                  className="h-9 rounded-md px-3 w-full"
-                />
-                <a
-                  href="#"
-                  className="text-sm ml-auto hover:text-lime-600 text-lime-900  hover:underline"
-                >
-                  Olvidé mi contraseña
-                </a>
-              </div>
-              <button
-                onClick={handleFormSubmit}
-                className="w-full h-9 bg-green-600 rounded-md m-auto"
-              >
-                Ingresar
-              </button>
-              <div className="flex space-x-2 text-sm">
-                <h1>¿Aún no tienes una cuenta?</h1>
-                <a href="/" className="hover:text-lime-600">
-                  Registrate
-                </a>
-              </div>
-            </form>
           </div>
         </div>
       </main>

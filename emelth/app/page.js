@@ -1,7 +1,9 @@
+'use client'
+
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import Layout from "@/components/components_usu_no_registrado/layout";
-import Galerialoca from "@/components/galerialoca";
+import Layout from "@/components/components_usu_no_registrado/layout.js";
+// import Galerialoca from "@/apppcomponents/galerialoca";
 import Carrusel from "@/components/carrusel";
 
 const inter = Inter({ subsets: ["latin"] });
