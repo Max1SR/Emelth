@@ -1,15 +1,33 @@
-"use client";
-
+'use client'
 import { useEffect, useState } from "react";
 import React from "react";
-import Layout from "@/components/components_encargado/layout";
-import { Inter } from "next/font/google";
+import Layout from "@/components/components_usu_no_registrado/layout";
+ import { Inter } from "next/font/google";
 import io from "socket.io-client";
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import { SessionProvider } from "next-auth/react";
 
-const socket = io.connect("http://192.168.20.141:3001");
+
+const socket = io.connect("http://10.0.0.1:3001");
 const inter = Inter({ subsets: ["latin"] });
+ function GestionPeticiones() {
+  
+  const { data: session } = useSession({
+    
+    required: true,
+    onUnauthenticated() {
+        redirect('/api/auth/signin?callbackUrl=/client')
+    }
+    
+})
+// // const user = session.user;
 
-export default function gestionPeticiones() {
+//   const rol= user?.rol
+// console.log(session);
+// console.log(rol);
+
+ 
   const [requests, setRequests] = useState([]);
   function addRequestToState(request) {
     setRequests((prevState) => [...prevState, request]);
@@ -22,7 +40,7 @@ export default function gestionPeticiones() {
   };
   const handleReceiveMessage = (data) => {
     let request1 = data.message;
-    console.log(request1);
+    // console.log(request1);
 
     switch (request1.Type) {
       case "request":
@@ -228,5 +246,13 @@ export default function gestionPeticiones() {
         </div>
       </main>
     </Layout>
+  );
+
+}
+export default function GestionPeticionesWrapper() {
+  return (
+    <SessionProvider >
+      <GestionPeticiones />
+    </SessionProvider>
   );
 }

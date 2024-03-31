@@ -1,7 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { decode, getToken } from "next-auth/jwt";
-import axios from "axios";
 
+
+import axios from "axios";
 export const options = {
   providers: [
     CredentialsProvider({
@@ -11,17 +11,7 @@ export const options = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log(credentials.username);
-        const user = { id: "42", name: username, password: password };
-        //const secretKey = process.env.NEXTAUTH_URL;
-        const accessToken = decode(credentials.csrfToken);
-
-        console.log(accessToken);
-        //console.log(credentials);
-        //console.log(credentials.csrfToken)
-        console.log(username);
-
-        console.log(password);
+        const{username,password}=credentials;
         if (username) {
           try {
             const res = await axios.post("http://localhost:3001/login", {
@@ -33,7 +23,13 @@ export const options = {
 
               if (data.Status == "Success") {
                 console.log("Si jalo xddddddd");
+              
+                const user = data.user;
+               // const token = sign(user, process.env.NEXTAUTH_SECRET)
+                console.log(user);
 
+      // Guarda el JWT en las cookies
+              console.log("realizo esto");
                 return user;
               } else {
                 console.log("Error al iniciar sesión");
@@ -51,7 +47,9 @@ export const options = {
       },
     }),
   ],
+
   pages: {
     signIn: "/signIn",
   },
+  session: { strategy: "jwt" }
 };
