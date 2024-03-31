@@ -1,5 +1,5 @@
-"use client"
-import React,{useState} from "react";
+"use client";
+import React, { useState } from "react";
 
 import { Inter } from "next/font/google";
 import { signIn } from "next-auth/react";
@@ -8,24 +8,22 @@ import { redirect } from "next/dist/server/api-utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function signin_signup() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const handleFormSubmit = async(e) => {
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log(formData.username,formData.password);
-    let username=formData.username;
-    console.log(username)
-    let password=formData.password;
-    console.log(password)
-    await signIn("credentials",{
-      username:username ,
-      password:password,
-      redirect:false,
-      
 
-    })
-
-    
+    console.log(formData.username, formData.password);
+    let username = formData.username;
+    console.log(username);
+    let password = formData.password;
+    console.log(password);
+    await signIn("credentials",
+      {
+        username:username,
+        password:password,
+        redirect:true,
+        callbackUrl:"/"
+      });
   };
   const handleRegister = () => {
     const container = document.getElementById("container");
@@ -41,8 +39,7 @@ export default function signin_signup() {
     <div>
       <header className="bg-white shadow text-slate-600">
         <div className="flex h-14 items-center px-10 space-x-4">
-          <a href="/">
-          </a>
+          <a href="/"></a>
           <p className="text-xl text-gray-900 font-medium">Emelth</p>
         </div>
       </header>
@@ -62,9 +59,11 @@ export default function signin_signup() {
                 <div className="form-heading">
                   <p className="heading-input">Correo electrónico</p>
                 </div>
-                <input 
+                <input
                   value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }
                   type="email"
                   placeholder="Escriba su correo electrónico"
                   className="h-9 rounded-md px-3"
@@ -75,8 +74,10 @@ export default function signin_signup() {
                   <p className="heading-input">Contraseña</p>
                 </div>
                 <input
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                   type="password"
                   placeholder="Escriba su contraseña"
                   className="h-9 rounded-md px-3"
@@ -88,9 +89,10 @@ export default function signin_signup() {
                   Olvidé mi contraseña
                 </a>
               </div>
-              <button 
-              onClick={(handleFormSubmit)}
-              className="w-full h-9 bg-green-600 rounded-md">
+              <button
+                onClick={handleFormSubmit}
+                className="w-full h-9 bg-green-600 rounded-md"
+              >
                 Ingresar
               </button>
               <div className="flex space-x-2 text-sm">
