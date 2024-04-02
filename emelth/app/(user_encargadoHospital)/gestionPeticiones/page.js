@@ -9,11 +9,13 @@ import { redirect } from 'next/navigation'
 import { SessionProvider } from "next-auth/react";
 
 
+
 const socket = io.connect("http://10.0.0.1:3001");
 const inter = Inter({ subsets: ["latin"] });
  function GestionPeticiones() {
-  
-  const { data: session } = useSession({
+  const session1= useSession()
+  const { data: session, status } = useSession({
+
     
     required: true,
     onUnauthenticated() {
@@ -21,11 +23,15 @@ const inter = Inter({ subsets: ["latin"] });
     }
     
 })
-// // const user = session.user;
+ const user = session?.user;
+console.log(session1?.user)
+   const rol= user?.rol
+ console.log(session);
+ console.log(rol);
 
-//   const rol= user?.rol
-// console.log(session);
-// console.log(rol);
+
+
+
 
  
   const [requests, setRequests] = useState([]);
@@ -73,10 +79,12 @@ const inter = Inter({ subsets: ["latin"] });
 
   return (
     <Layout>
+    
       <main
         className={` min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800`}
       >
         <div>
+          <p>{`Bienvenidad ${session?.user.rol}`}</p>
           <table
             className="
                 table-auto
