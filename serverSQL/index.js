@@ -21,7 +21,7 @@ const saltRounds = 10;
 
 app.post('/register', (req, res) => {
     const sql = 'INSERT INTO credentials (user,password) VALUES (?)';
-   
+   console.log("new register")
 
     bcrypt.hash(req.body.password.toString(), saltRounds, (err, hash) => {
         if (err) {
@@ -38,7 +38,7 @@ app.post('/register', (req, res) => {
                 return res.status(500).json({ error: 'User registration failed' });
             }
 
-            return res.json({ message: 'User registered successfully' });
+            return res.json({ Status: 'User registered successfully' });
         });
     });
 });
@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
                 {
                     if(err) return res.json({Err:"Error"});
                     if(response){
-                        res.json({
+                        return res.json({
                             Status:"Success",
                             user:{id:"1",rol:"3",WebSocketId:"2"}
                         

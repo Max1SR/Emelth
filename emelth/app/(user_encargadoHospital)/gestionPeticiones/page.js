@@ -13,7 +13,7 @@ import { SessionProvider } from "next-auth/react";
 const socket = io.connect("http://10.0.0.1:3001");
 const inter = Inter({ subsets: ["latin"] });
  function GestionPeticiones() {
-  const session1= useSession()
+ 
   const { data: session, status } = useSession({
 
     
@@ -24,7 +24,7 @@ const inter = Inter({ subsets: ["latin"] });
     
 })
  const user = session?.user;
-console.log(session1?.user)
+console.log(session?.user)
    const rol= user?.rol
  console.log(session);
  console.log(rol);
