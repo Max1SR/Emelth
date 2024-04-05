@@ -17,18 +17,27 @@ import axios from 'axios';
 
 export default function maps() {
   const [hospitals, setHospitals] = useState([]);
+  const [selectedHospital, setSelectedHospital] = useState('Hospital General Enrique Cabrera'); 
   useEffect(() => {
     // Llamada a la API para obtener los hospitales al cargar el componente
     axios.post("http://localhost:3001/getHospitals")
       .then(res => {
         console.log(res.data.data)
         setHospitals(res.data.data); // Almacenar los hospitales en el estado
-       
+        
       })
       .catch(error => {
         console.error('Error fetching hospitals:', error);
       });
   }, []); 
+  const handleSelectChange = (event) => {
+    const selectedKey = event.target.value; // Obtener el valor seleccionado del formulario
+    console.log(selectedKey);
+    const selectedHospital = hospitals.find(hospital => hospital.Nombre === selectedKey);
+    console.log(selectedHospital); // Encontrar el hospital seleccionado
+    setSelectedHospital(selectedHospital); // Actualizar el estado con el hospital seleccionado
+  };
+  
 
   const position = { lat: 19.359695, lng: -99.163181 };
 
@@ -70,39 +79,44 @@ export default function maps() {
               </APIProvider>*/}
 
           <div className="w-1/2 h-full rounded-3xl p-5">
-            <form
+            <form  
               action="ServMap"
               method="post"
               className="flex items-center space-x-3"
             >
-              <select name="mapa" id="mapaWi">
+              <select name="mapa" id="mapaWi" onChange={handleSelectChange}>
                  {/* Generar opciones para cada hospital */}
+                 <option></option>
                  {hospitals.map(hospital => (
+                  
                   <option key={hospital.key} value={hospital.key}>{hospital.Nombre}</option>
+                  
                 ))}
               </select>
-              <input type="submit" value="Actualizar" />
+             
             </form>
 
-            <div className="flex flex-col space-y-4 p-5">
-              <span class="Info">Informacion de hospitales</span>
-              <div className="flex flex-row space-x-4">
-                <p className="w-1/6">Nombre</p>
-                <p>Nombre del hospital</p>
+            {selectedHospital && ( // Mostrar datos del hospital solo si está seleccionado
+              <div className="flex flex-col space-y-4 p-5">
+                <span className="Info">Informacion del hospital</span>
+                <div className="flex flex-row space-x-4">
+                  <p className="w-1/6">Nombre</p>
+                  <p>{selectedHospital.Nombre}</p>
+                </div>
+                <div className="flex flex-row space-x-4">
+                  <p className="w-1/6">Calle</p>
+                  <p>{selectedHospital.Calle}</p>
+                </div>
+                <div className="flex flex-row space-x-4">
+                  <p className="w-1/6">Colonia</p>
+                  <p>{selectedHospital.Colonia}</p>
+                </div>
+                <div className="flex flex-row space-x-4">
+                  <p className="w-1/6">Codigo Postal</p>
+                  <p>{selectedHospital.CodigoPostal}</p>
+                </div>
               </div>
-              <div className="flex flex-row space-x-4">
-                <p className="w-1/6">Calle</p>
-                <p>Calle del hospital</p>
-              </div>
-              <div className="flex flex-row space-x-4">
-                <p className="w-1/6">Colonia</p>
-                <p>Colonia del hospital</p>
-              </div>
-              <div className="flex flex-row space-x-4">
-                <p className="w-1/6">Codigo Postal</p>
-                <p>Codigo Postal del hospital</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </main>
