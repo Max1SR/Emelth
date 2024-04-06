@@ -1,6 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-
-
+import { sign, verify } from 'jsonwebtoken'
 import axios from "axios";
 export const options = {
   providers: [
@@ -20,17 +19,14 @@ export const options = {
             });
             if (res) {
               let data = res.data;
-
               if (data.Status == "Success") {
                 console.log("Si jalo xddddddd");
-              
                 const user = data.user;
-               // const token = sign(user, process.env.NEXTAUTH_SECRET)
-                console.log(user);
-
-      // Guarda el JWT en las cookies
-              console.log("realizo esto");
-                return user;
+                console.log(user)
+                const token = sign(user, process.env.NEXTAUTH_SECRET)
+                // Return the token instead of the user
+                console.log(token)
+                return token,user;
               } else {
                 console.log("Error al iniciar sesión");
                 return null;
@@ -51,5 +47,6 @@ export const options = {
   pages: {
     signIn: "/signIn",
   },
-  session: { strategy: "jwt" }
+  session: { strategy: "jwt" },
+  
 };
