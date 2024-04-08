@@ -14,13 +14,14 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Heatens123-',
-    database: 'users',
+    database: 'emelth',
 });
 
 const saltRounds = 10; 
 
 app.post('/register', (req, res) => {
-    const sql = 'INSERT INTO credentials (user,password) VALUES (?)';
+    const WebSocketId= 'testSocket'
+    const sql = 'INSERT INTO usuario (usu_correo,usu_pass,id_rol,id_wsid) VALUES (?)';
    console.log("new register")
 
     bcrypt.hash(req.body.password.toString(), saltRounds, (err, hash) => {
@@ -30,7 +31,7 @@ app.post('/register', (req, res) => {
         }
 
        
-        const values = [req.body.username, hash];
+        const values = [req.body.username, hash,req.body.rol, WebSocketId];
 
         db.query(sql, [values], (err, result) => {
             if (err) {
@@ -58,7 +59,7 @@ app.post('/login', (req, res) => {
                     if(response){
                         return res.json({
                             Status:"Success",
-                            user:{id:"1",rol:"3",WebSocketId:"2"}
+                            user:{id:"1",rol:"1",WebSocketId:"2"}
                         
                         });
                               

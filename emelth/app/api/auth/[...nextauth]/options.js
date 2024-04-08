@@ -21,12 +21,16 @@ export const options = {
               let data = res.data;
               if (data.Status == "Success") {
                 console.log("Si jalo xddddddd");
-                const user = data.user;
+                console.log(data.user)
+                const user ={
+               name: `${data.user.rol}`,//en realidad es el rol
+                email: `${data.user.WebSocketId}`,//en realidad es el websocketId
+                image: `${data.user.id}`,//en realidad es el id de usuario
+               
+              };
                 console.log(user)
-                const token = sign(user, process.env.NEXTAUTH_SECRET)
-                // Return the token instead of the user
-                console.log(token)
-                return token,user;
+              
+                return user;
               } else {
                 console.log("Error al iniciar sesión");
                 return null;
@@ -47,6 +51,16 @@ export const options = {
   pages: {
     signIn: "/signIn",
   },
-  session: { strategy: "jwt" },
+  session: {
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
+    async session(session, user) {
+      session.rol = user.rol;
+      session.webSocketId = user.webSocketId;
+      return session;
+    },
+  },
+
   
 };

@@ -7,27 +7,42 @@ import io from "socket.io-client";
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { SessionProvider } from "next-auth/react";
+import { useRouter } from "next/router";
 
 
 
 const socket = io.connect("http://10.0.0.1:3001");
 const inter = Inter({ subsets: ["latin"] });
  function GestionPeticiones() {
- 
+  const [loading, setLoading] = useState(true); // Estado de carga
   const { data: session, status } = useSession({
-
-    
     required: true,
     onUnauthenticated() {
-        redirect('/api/auth/signin?callbackUrl=/client')
+      // Aquí es donde redireccionas.
+      const router = useRouter();
+      router.push('/api/auth/signin?callbackUrl=/client');
     }
-    
-})
- const user = session?.user;
-console.log(session?.user)
-   const rol= user?.rol
- console.log(session);
- console.log(rol);
+  });
+
+  useEffect(() => {
+    if (session) {
+      const rol = session.user?.name;
+
+      if (rol === '3') {
+        redirect('/register');
+      } else if (rol !== '3' && rol !== '1') {
+        // Redirecciona a donde necesites en este caso
+      }
+
+      setLoading(false); // Finaliza la carga cuando se ha realizado la comprobación
+    }
+  }, [session]);
+
+  if (loading) {
+    return <div>Cargando...</div>; // Muestra un indicador de carga mientras se realiza la comprobación
+  }
+
+ 
 
 
 
@@ -260,6 +275,7 @@ console.log(session?.user)
 export default function GestionPeticionesWrapper() {
   return (
     <SessionProvider >
+      
       <GestionPeticiones />
     </SessionProvider>
   );

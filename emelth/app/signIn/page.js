@@ -17,13 +17,14 @@ export default function signin_signup() {
     console.log(username);
     let password = formData.password;
     console.log(password);
-    await signIn("credentials",
+    let result =await signIn("credentials",
       {
         username:username,
         password:password,
-        redirect:true,
-        callbackUrl:"/"
+        // redirect:true,
+        // callbackUrl:"/"
       });
+      console.log(result);
   };
   const handleRegister = () => {
     const container = document.getElementById("container");
