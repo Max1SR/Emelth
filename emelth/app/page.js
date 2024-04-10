@@ -41,7 +41,7 @@ export default function Home() {
             <div className="min-h-[96] min-w-72  w-3/5 ">
               <img
                 className="h-full w-full object-cover rounded-lg"
-                src="https://cdn.bmeditores.mx/2019/12/WQHZA3YTYZE7TLW734FJ5AGPDI-696x375.jpg"
+                src="https://img.freepik.com/vector-premium/coche-ambulancia-fondo-blanco-aislado-vehiculo-emergencia-ilustracion-vectorial-estilo-dibujos-animados_165429-1220.jpg"
               ></img>
             </div>
           </div>
@@ -72,13 +72,17 @@ export default function Home() {
 
             <img
               className="w-full h-72 object-cover rounded-lg"
-              src="@/components/img/ambulance.svg"
+              src="https://img.freepik.com/vector-premium/coche-ambulancia-fondo-blanco-aislado-vehiculo-emergencia-ilustracion-vectorial-estilo-dibujos-animados_165429-1220.jpg"
             ></img>
           </div>
         </div>
 
         {/* Se supone que el carrusel es el div 4 */}
-        <Carrusel className="mb-20"></Carrusel>
+
+        
+        {/* eliminar o validar si se vba a seguir usando, depende de que otros logins se propongan o si no hay forma de poder adecuarlo */}
+
+        {/* <Carrusel className="mb-20"></Carrusel> */}
 
         <div className="">
           {/* Web - Div 3*/}
@@ -86,7 +90,7 @@ export default function Home() {
             <div className="min-h-96 min-w-72  w-2/4 ">
               <img
                 className="h-full w-full object-cover rounded-l-lg"
-                src="https://www.nmas.com.mx/_next/image/?url=https%3A%2F%2Fstatic-live.nmas.com.mx%2Fnmas-news%2Fstyles%2Fcorte_16_9%2Fcloud-storage%2F2023-08%2Fcheems-memes-perro.jpg%3Fitok%3DVKUSRRie&w=1920&q=80"
+                src="https://lh5.googleusercontent.com/56fYcJKSarr1NEWg8XSiU-qfFGmNi4_76vZ72FvZd19T77qqZH6R74AIKGaGsIMhgflQqrf75_000o7yXn90iW_0akAfWIxeycqlfsprCh437pXGTGcB3h8FREPttA43kK7O7Y99EJ_h-IxoW-8itw"
               ></img>
             </div>
             <div className="w-2/4 space-y-5  flex flex-col p-12 bg-slate-400 rounded-r-lg justify-center">
@@ -108,7 +112,7 @@ export default function Home() {
             <div className="w-full ">
               <img
                 className="h-1/2 w-full object-cover rounded-t-lg"
-                src="https://www.nmas.com.mx/_next/image/?url=https%3A%2F%2Fstatic-live.nmas.com.mx%2Fnmas-news%2Fstyles%2Fcorte_16_9%2Fcloud-storage%2F2023-08%2Fcheems-memes-perro.jpg%3Fitok%3DVKUSRRie&w=1920&q=80"
+                src="https://lh5.googleusercontent.com/56fYcJKSarr1NEWg8XSiU-qfFGmNi4_76vZ72FvZd19T77qqZH6R74AIKGaGsIMhgflQqrf75_000o7yXn90iW_0akAfWIxeycqlfsprCh437pXGTGcB3h8FREPttA43kK7O7Y99EJ_h-IxoW-8itw"
               ></img>
             </div>
             <div className=" space-y-5  flex flex-col p-12 bg-slate-400 rounded-b-lg justify-center w-full h-1/2 ">
