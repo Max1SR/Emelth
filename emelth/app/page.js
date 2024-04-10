@@ -72,7 +72,7 @@ export default function Home() {
 
             <img
               className="w-full h-72 object-cover rounded-lg"
-              src="https://cdn.bmeditores.mx/2019/12/WQHZA3YTYZE7TLW734FJ5AGPDI-696x375.jpg"
+              src="@/components/img/ambulance.svg"
             ></img>
           </div>
         </div>
