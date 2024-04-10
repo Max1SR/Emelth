@@ -119,13 +119,7 @@ export default function Header() {
             >
               Sign in
             </a>
-            <span className="mx-2">|</span>
-            <a
-              className="text-slate-600   hover:text-sky-500 transition-colors"
-              href="/signUp"
-            >
-              Sign up
-            </a>
+            
           </div>
         </div>
       </div>
@@ -193,13 +187,8 @@ export default function Header() {
                 >
                   Sign in
                 </a>
-                <span className="mx-6 text-slate-950">|</span>
-                <a
-                  href="/signUp"
-                  className="-mx-3  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Sign up
-                </a>
+                
+                
               </div>
             </div>
           </div>
