@@ -13,7 +13,7 @@ export const options = {
         const{username,password}=credentials;
         if (username) {
           try {
-            const res = await axios.post("http://localhost:3001/login", {
+            const res = await axios.post("http://192.168.20.150:3001/login", {
               username,
               password,
             });

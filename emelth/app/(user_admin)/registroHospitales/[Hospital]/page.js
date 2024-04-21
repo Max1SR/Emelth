@@ -10,10 +10,11 @@ export default function HospitalDetails({ params }) {
 
     useEffect(() => {
         let oldHospitalName = params.Hospital;
-        let newHospitalName = oldHospitalName.replace(/%20/g, " ");
+        let newHospitalName = decodeURIComponent(oldHospitalName);
+        
 
         // Obtener datos del hospital
-        axios.post("http://localhost:3001/getHospital", { hospitalName: newHospitalName })
+        axios.post("http://192.168.20.150:3002/getHospital", { hospitalName: newHospitalName })
             .then(res => {
                 let data = res.data;
                 if (data.Status === "Success") {
@@ -28,7 +29,7 @@ export default function HospitalDetails({ params }) {
             });
 
         // Obtener lista de especialidades
-        axios.post("http://localhost:3001/getEsp")
+        axios.post("http://192.168.20.150:3002/getEsp")
             .then(res => {
                 let data = res.data;
                 if (data.Status === "Success") {
@@ -108,82 +109,66 @@ export default function HospitalDetails({ params }) {
     }
 
     return (
-        <div>
-            <div>
-                <h2>Agregar especialidad</h2>
-                <select value={selectedEspecialidad} onChange={(e) => setSelectedEspecialidad(e.target.value)}>
-                    <option value="">Selecciona una especialidad</option>
-                    {especialidades.map((especialidad, index) => (
-                        <option key={especialidad.id_esp} value={especialidad.esp_especialidad}>{especialidad.esp_especialidad}</option>
-                    ))}
-                </select>
-                <button onClick={handleAddEspecialidad}>Agregar</button>
-            </div>
-            <div>
-                <h2>Especialidades del hospital</h2>
-                <ul>
+        <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-2">Especialidades:</h2>
+                <ul className="list-disc pl-5">
                     {hospitalData.especialidades.map((especialidad, index) => (
-                        <li key={especialidad
-                        
-                        }>
-                            {especialidad.nombre}
-                            <button onClick={() => handleDeleteEspecialidad(index)}>Eliminar</button>
-                        </li>
+                        <li key={index}>{especialidad}</li>
                     ))}
                 </ul>
             </div>
             <div>
-                <h2>Información del Hospital:</h2>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Telefono:</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    name="Telefono"
-                                    value={hospitalData.informacionHospital.Telefono}
-                                    onChange={handleInputChange}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Calle:</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    name="Calle"
-                                    value={hospitalData.informacionHospital.Calle}
-                                    onChange={handleInputChange}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Colonia:</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    name="Colonia"
-                                    value={hospitalData.informacionHospital.Colonia}
-                                    onChange={handleInputChange}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Código Postal:</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    name="CodigoPostal"
-                                    value={hospitalData.informacionHospital.CodigoPostal}
-                                    onChange={handleInputChange}
-                                />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 className="text-2xl font-bold mb-4">Información del Hospital:</h2>
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label className="block mb-1">Telefono:</label>
+                        <input
+                            type="text"
+                            name="Telefono"
+                            value={hospitalData.informacionHospital.Telefono}
+                            onChange={handleInputChange}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block mb-1">Calle:</label>
+                        <input
+                            type="text"
+                            name="Calle"
+                            value={hospitalData.informacionHospital.Calle}
+                            onChange={handleInputChange}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block mb-1">Colonia:</label>
+                        <input
+                            type="text"
+                            name="Colonia"
+                            value={hospitalData.informacionHospital.Colonia}
+                            onChange={handleInputChange}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label className="block mb-1">Código Postal:</label>
+                        <input
+                            type="text"
+                            name="CodigoPostal"
+                            value={hospitalData.informacionHospital.CodigoPostal}
+                            onChange={handleInputChange}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                </div>
             </div>
-            <button onClick={handleSubmit}>Guardar cambios</button>
+            <button
+                onClick={handleSubmit}
+                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Guardar cambios
+            </button>
         </div>
     );
 }

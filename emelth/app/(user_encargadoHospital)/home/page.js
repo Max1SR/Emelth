@@ -1,12 +1,15 @@
+'use client'
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Layout from "@/components/components_encargado/layout";
 import Galerialoca from "@/components/galerialoca";
 import Carrusel from "@/components/carrusel";
+import Home from "@/app/page";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function page() {
+ function Homepage() {
   return (
     <Layout>
       <main
@@ -19,4 +22,12 @@ export default function page() {
       </main>
     </Layout>
   );
+}
+export default function page(){
+  return (
+    <SessionProvider >
+      <Homepage />
+    </SessionProvider>
+  );
+
 }

@@ -1,41 +1,58 @@
 'use client'
-// LoginPage.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { SessionProvider } from 'next-auth/react';
+import Layout from "@/components/components_admin/layout";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+import {validateUserRegister} from "@/components/validations/user";
 
-function LoginRegister() {
+
+function Register() {
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({ username: '', password: '', rol: '' });
 
   const handleFormSubmit2 = (e) => {
     e.preventDefault();
-    // Basic validation
-    if (!formData.username || !formData.password || !formData.rol) {
-      setError('Por favor, ingrese un usuario, contraseña y rol.');
-      return;
-    }
-    // Reset error message
+   let answer=validateUserRegister(formData)
+   alert(answer);
+    
+
+    // if (valid && validRol) {
+    //   axios.post("http://localhost:3001/register", formData)
+    //   .then(res => {
+    //     let data = res.data;
+    //     if (data.Status) {
+    //        alert(data.Status);
+
+    //     } else {
+    //       setError('Error al iniciar sesión. Por favor, intente de nuevo.');
+    //     }
+    //   })
+    //   .catch(err => {
+    //     // Handle error, display error message
+    //     setError('Error al iniciar sesión. Por favor, intente de nuevo.');
+    //     console.log(err);
+    //   });
+      
+    // }else{
+    //   setError("Rellene todos los campos");
+    // }
+
     setError('');
 
     // API call to register or login
-    axios.post("http://localhost:3001/register", formData)
-      .then(res => {
-        let data = res.data;
-        if (data.Status) {
-
-        } else {
-          setError('Error al iniciar sesión. Por favor, intente de nuevo.');
-        }
-      })
-      .catch(err => {
-        // Handle error, display error message
-        setError('Error al iniciar sesión. Por favor, intente de nuevo.');
-        console.log(err);
-      });
+   
   }
 
   return (
-    <div className="loginPage">
+
+    <Layout>
+      <main
+        className={`flex min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800`}
+      >
+        <div className="loginPage">
       <h1 className="loginPage-title">Registrar en mi Aplicación</h1>
       <form onSubmit={handleFormSubmit2}>
         <input
@@ -57,7 +74,7 @@ function LoginRegister() {
           value={formData.rol}
           onChange={(e) => setFormData({ ...formData, rol: e.target.value })}
         >
-          <option value="">Selecciona un rol</option>
+          <option value="0">Selecciona un rol</option>
           <option value="1">Paramédico</option>
           <option value="2">Admin</option>
           <option value="3">Hospital</option>
@@ -67,7 +84,20 @@ function LoginRegister() {
       <h1 className="loginPage-title">Iniciar sesión en mi Aplicación</h1>
       {error && <p className="error">{error}</p>}
     </div>
+        
+      </main>
+    </Layout>
+
+    
   );
 }
 
-export default LoginRegister;
+export default function LoginRegister(){
+  return(
+    <SessionProvider>
+       <Register />
+    </SessionProvider>
+
+  );
+
+};
