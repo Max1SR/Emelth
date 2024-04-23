@@ -19,26 +19,7 @@ function Register() {
    alert(answer);
     
 
-    // if (valid && validRol) {
-    //   axios.post("http://localhost:3001/register", formData)
-    //   .then(res => {
-    //     let data = res.data;
-    //     if (data.Status) {
-    //        alert(data.Status);
-
-    //     } else {
-    //       setError('Error al iniciar sesión. Por favor, intente de nuevo.');
-    //     }
-    //   })
-    //   .catch(err => {
-    //     // Handle error, display error message
-    //     setError('Error al iniciar sesión. Por favor, intente de nuevo.');
-    //     console.log(err);
-    //   });
-      
-    // }else{
-    //   setError("Rellene todos los campos");
-    // }
+    
 
     setError('');
 

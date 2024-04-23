@@ -9,15 +9,15 @@ export default function HospitalDetails({ params }) {
     const [selectedEspecialidad, setSelectedEspecialidad] = useState('');
 
     useEffect(() => {
-        let oldHospitalName = params.Hospital;
-        let newHospitalName = decodeURIComponent(oldHospitalName);
         
-
+        
+        console.log(params.Hospital)
         // Obtener datos del hospital
-        axios.post("http://192.168.20.150:3002/getHospital", { hospitalName: newHospitalName })
+        axios.get(`/api/hospitals/${params.Hospital}`)
             .then(res => {
                 let data = res.data;
                 if (data.Status === "Success") {
+                   
                     setHospitalData(data.data);
                 } else {
                     setError('Error al obtener detalles del hospital. Por favor, intente de nuevo.');
@@ -29,10 +29,11 @@ export default function HospitalDetails({ params }) {
             });
 
         // Obtener lista de especialidades
-        axios.post("http://192.168.20.150:3002/getEsp")
+        axios.get("/api/especialidades")
             .then(res => {
                 let data = res.data;
                 if (data.Status === "Success") {
+                 
                     setEspecialidades(data.data);
                 } else {
                     setError('Error al obtener la lista de especialidades. Por favor, intente de nuevo.');

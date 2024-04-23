@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "@/components/components_encargado/layout";
-
+import axios from "axios";
 import { Inter } from "next/font/google";
 import io from "socket.io-client";
 import { useSession } from 'next-auth/react'
@@ -28,8 +28,8 @@ function GestionPeticiones() {
         
       }
       if (rol === '1') {
-        router.push("/HomeAdmin");
-
+        // router.push("/HomeAdmin");
+        setLoading(false)
       
       } else if (rol !== '3' && rol !== '1') {
        
@@ -46,6 +46,14 @@ function GestionPeticiones() {
 
   useEffect(() => {
     if (session) {
+      axios.post("/api/websocket",{id:session.user.email}).then(res => {
+        let data = res.data;
+            console.log(data);
+      }
+      
+      
+      
+      )
       const handleReceiveMessage = (data) => {
         let request1 = data.message;
         if (request1.Type === "request") {

@@ -1,6 +1,10 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { sign, verify } from 'jsonwebtoken'
-import axios from "axios";
+import { conn } from "@/lib/mysql";
+import bcrypt from "bcrypt";
+import util from "util";
+
+
+const queryAsync = util.promisify(conn.query).bind(conn);
 export const options = {
   providers: [
     CredentialsProvider({
@@ -9,36 +13,31 @@ export const options = {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const{username,password}=credentials;
+        console.log(credentials)
         if (username) {
+          const checkEmailSql = 'SELECT * FROM usuario WHERE usu_correo = ?';
           try {
-            const res = await axios.post("http://192.168.20.150:3001/login", {
-              username,
-              password,
-            });
-            if (res) {
-              let data = res.data;
-              if (data.Status == "Success") {
-                console.log("Si jalo xddddddd");
-                console.log(data.user)
-                const user ={
-               name: `${data.user.rol}`,//en realidad es el rol
-                email: `${data.user.WebSocketId}`,//en realidad es el websocketId
-                image: `${data.user.id}`,//en realidad es el id de usuario
-               
-              };
-                console.log(user)
-              
-                return user;
-              } else {
-                console.log("Error al iniciar sesión");
-                return null;
-              }
-            } else {
-              console.log("nada");
-              return null;
+            
+            const result = await queryAsync(checkEmailSql, [username]);
+            console.log(result)
+        if (result.length > 0) {
+            const match = await bcrypt.compare(password.toString(), result[0].usu_pass);
+            if (match) {
+              const user= {
+                image: `${result[0].id_usu}`,
+                name: `${result[0].id_rol}`,
+                email: `${result[0].id_wsid}`
             }
+            console.log(user)
+                return user
+            } else {
+                return null
+            }
+        } else {
+            return null
+        }
           } catch (err) {
             console.error(err);
             return null;

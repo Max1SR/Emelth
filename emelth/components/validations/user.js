@@ -6,15 +6,11 @@ const passwordRegex = /^.{8,15}$/;
 function validateUserRegister(data){
   console.log(data)
     if(validateUser(data.username,data.password)&&validateRol(data.rol)){
-        axios.post("http://192.168.137.1:3001/register", data)
+        axios.post("/api/user", data)
           .then(res => {
             let data = res.data;
-            if (data.Status) {
-              return ("Usuario Registrado")
-    
-            } else {
-              return('Error al registrar. Por favor, intente de nuevo.');
-            }
+            alert(data.message)
+            return (data.message)
           })
           .catch(err => {
             console.log(err);
@@ -33,8 +29,8 @@ async function validateUserLogin(data){
       {
         username:data.username,
         password:data.password,
-        redirect:true,
-        callbackUrl:"/"
+        
+        
       }); 
   }
 
