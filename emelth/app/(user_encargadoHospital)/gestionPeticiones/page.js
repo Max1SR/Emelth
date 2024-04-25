@@ -4,13 +4,13 @@ import React from "react";
 import Layout from "@/components/components_encargado/layout";
 import axios from "axios";
 import { Inter } from "next/font/google";
-import io from "socket.io-client";
+import io, { connect } from "socket.io-client";
 import { useSession } from 'next-auth/react'
 import { SessionProvider } from "next-auth/react";
 import {useRouter} from 'next/navigation';
 
 
-const socket = io.connect("http://10.0.0.1:3001");
+const socket = io.connect("http://192.168.20.150:3001");
 const inter = Inter({ subsets: ["latin"] });
 
 function GestionPeticiones() {
@@ -23,7 +23,7 @@ function GestionPeticiones() {
   useEffect(() => {
     if (status === "authenticated") {
       const rol = session.user?.name;
-      console.log(session.user);
+      
       if (rol ==="3"){
         
       }
@@ -47,8 +47,10 @@ function GestionPeticiones() {
   useEffect(() => {
     if (session) {
       axios.post("/api/websocket",{id:session.user.email}).then(res => {
-        let data = res.data;
-            console.log(data);
+      
+            const websocketid=res.data.websocketid
+            console.log(websocketid)
+             socket.emit('client_id', { client_id: websocketid });
       }
       
       
@@ -57,13 +59,23 @@ function GestionPeticiones() {
       const handleReceiveMessage = (data) => {
         let request1 = data.message;
         if (request1.Type === "request") {
+          console.log(request1)
           setRequests(prevState => [...prevState, request1]);
         }
       };
       const handleRequests = (data) => {
         setRequests(data);
       };
+      
+      socket.on("connect",()=>{
+      
+        socket.emit("client_id",
+          { client_id: websocketid }
 
+      
+
+
+            )      })
       socket.on("recieve_message", handleReceiveMessage);
       socket.on("server_requests", handleRequests);
       socket.on("server_message", (data) => {
@@ -71,6 +83,8 @@ function GestionPeticiones() {
       });
 
       return () => {
+      
+      
         socket.off("recieve_message", handleReceiveMessage);
         socket.off("server_message");
         socket.off("server_requests");

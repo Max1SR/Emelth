@@ -11,7 +11,7 @@ export default function HospitalDetails({ params }) {
     useEffect(() => {
         
         
-        console.log(params.Hospital)
+     
         // Obtener datos del hospital
         axios.get(`/api/hospitals/${params.Hospital}`)
             .then(res => {
@@ -19,6 +19,7 @@ export default function HospitalDetails({ params }) {
                 if (data.Status === "Success") {
                    
                     setHospitalData(data.data);
+                    console.log(data.data);
                 } else {
                     setError('Error al obtener detalles del hospital. Por favor, intente de nuevo.');
                 }
@@ -33,8 +34,9 @@ export default function HospitalDetails({ params }) {
             .then(res => {
                 let data = res.data;
                 if (data.Status === "Success") {
-                 
+                    
                     setEspecialidades(data.data);
+                    console.log(data.data)
                 } else {
                     setError('Error al obtener la lista de especialidades. Por favor, intente de nuevo.');
                 }
@@ -80,25 +82,8 @@ export default function HospitalDetails({ params }) {
         // // Transformar especialidades a una lista de ids
         // const especialidadesIds = hospitalData.especialidades.map(especialidad => especialidad.id);
          console.log(especialidades)
-         console.log(hospitalData.especialidades)
-        // // Crear objeto con los datos actualizados
-        // const updatedHospitalData = {
-        //     ...hospitalData,
-        //     especialidades: especialidadesIds
-        // };
-
-        // // Enviar datos actualizados al servidor
-        // axios.post("https:localhost:3001/updateHos", updatedHospitalData).then(res => {
-        //     if (res.data.Status === "Success") {
-        //         console.log("Succes")
-        //     } else {
-        //         setError('Error al obtener la lista de especialidades. Por favor, intente de nuevo.');
-        //     }
-        // })
-        // .catch(error => {
-        //     console.error('Error al obtener la lista de especialidades:', error);
-        //     setError('Error al obtener la lista de especialidades. Por favor, intente de nuevo.');
-        // });
+         console.log(hospitalData)
+    
     };
 
     if (error) {

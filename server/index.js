@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 app.use(cors());
+let data;
 const server = http.createServer(app);
 const connectedUsers = {};
 const unreadPetitions = {};
@@ -15,21 +16,23 @@ const io = new Server(server, {
   },
 });
 io.on("connection", (socket) => {
-  let id = socket.id;
-  connectedUsers[id] = id;
-  socket.join(id);
-  data = {
-    Type: "id",
-    socketID: id,
-  };
-  io.to(id).emit("server_message", data);
+  socket.on('client_id', function(clientData) {
+    console.log('Client ID received from client:', clientData.client_id);
+    socket.join(clientData.client_id);
+    
+    connectedUsers[clientData.client_id] = clientData.client_id;
+    
+    const responseData = {
+      Type: "id",
+      socketID: clientData.client_id,
+    };
+    console.log(responseData);
+    io.to(clientData.client_id).emit("server_message", responseData);
+  });
+  
 
-  console.log(connectedUsers);
-  console.log(data);
-  console.log(`User Connected ${id}`);
 
   socket.emit("server_requests", unreadPetitions);
-
 
   socket.on("send_message", (data) => {
     console.log(data.message);
@@ -38,14 +41,16 @@ io.on("connection", (socket) => {
     console.log(unreadPetitions);
     socket.broadcast.emit("recieve_message", data);
   });
+
   socket.on("disconnect", () => {
-    delete connectedUsers[id];
+   
 
     // Enviar la lista actualizada después de la desconexión de un usuario
     console.log(connectedUsers);
-    console.log(`User Disconnected: ${id}`);
+    
   });
 });
+
 server.listen(3001, () => {
   console.log("Server is running");
 });

@@ -28,3 +28,37 @@ export async function GET(request,{params}){
         Status:"Success",
         data:hospitalData});
 }
+export async function PUT(request,{params}){
+    const request1=await request.json();
+    const data= request1.data;
+    console.log(request1)
+    console.log(data)
+    const name=decodeURIComponent(params.name)
+    console.log(name)
+    const sql= `SELECT id_dir FROM hospital WHERE hos_nombre= ?`
+    
+    const result=await conn.query(sql,name);
+    const sqlinsert=await conn.query(`UPDATE hospital SET ? WHERE hos_nombre =?`,[
+        data,
+        params.name,
+    ])
+    if(sqlinsert.affectedRows===0){
+        return NextResponse.json(
+            {
+                message:"Hospital no encontrado",
+                
+            },
+            {status:404,
+            }
+        )
+    }else{
+       const updatedHospital= await conn.query(`SELECT DISTINCT especialidad, Telefono,Calle,Colonia,CodigoPostal
+        FROM vwhospital
+        WHERE Nombre = ?`,params.name);
+        console.log(updatedHospital)
+        return NextResponse.json("Actualizado")
+    }
+
+    
+    
+}
