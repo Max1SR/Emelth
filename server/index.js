@@ -10,7 +10,7 @@ const unreadPetitions = {};
 let index = 0;
 const io = new Server(server, {
   cors: {
-    origin: "http://192.168.20.141:3000",
+    origin: "http://192.168.100.61:3000",
     methods: ["GET", "POST"],
   },
 });

@@ -10,7 +10,7 @@ import { SessionProvider } from "next-auth/react";
 
 
 
-const socket = io.connect("http://10.0.0.1:3001");
+const socket = io.connect("http://192.168.100.61:3001");
 const inter = Inter({ subsets: ["latin"] });
  function GestionPeticiones() {
  
