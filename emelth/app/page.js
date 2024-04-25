@@ -1,14 +1,37 @@
 'use client'
-
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import Layout from "@/components/components_usu_no_registrado/layout.js";
-// import Galerialoca from "@/apppcomponents/galerialoca";
-import Carrusel from "@/components/carrusel";
-
+import { SessionProvider } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
+import { useState,useEffect } from "react";
+import { useSession } from "next-auth/react";
 
-export default function Home() {
+
+function Home() {
+  const router= useRouter();
+
+  
+  const { data: session, status } = useSession();
+  useEffect(() => {
+    if (status === "authenticated") {
+      const rol = session.user?.name;
+      console.log(rol)
+      if (rol ==="3"){
+       router.push("/home");
+      }
+      if (rol === '1') {
+        router.push("/HomeAdmin")
+        
+      } 
+     
+     
+
+      // Finaliza la carga cuando se ha realizado la comprobación
+    }
+  }, [session, status]);
+
+  
   return (
     <Layout>
       <main
@@ -156,4 +179,12 @@ export default function Home() {
       </main>
     </Layout>
   );
+}
+export default  function HomeAll(){
+  return(
+    <SessionProvider>
+      <Home/>
+    </SessionProvider>
+  );
+
 }

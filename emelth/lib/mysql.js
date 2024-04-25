@@ -4,7 +4,7 @@ export const conn=mysql({
     config:{
         host:'localhost',
         user:'root',
-        password:'Heatens123-',
+        password:'12345',
         port:3306,
         database:'emelth'
     }

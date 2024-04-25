@@ -20,7 +20,8 @@ export default function signin_signup() {
     await signIn("credentials",{
       username:username ,
       password:password,
-      redirect:false,
+      redirect:true,
+      callbackUrl:'/'
       
 
     })

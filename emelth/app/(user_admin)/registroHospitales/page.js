@@ -6,8 +6,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect } from "react";
 import Layout from "@/components/components_admin/layout";
-import axios from "axios";
-import Link from "next/link";
+import axios from 'axios';
+import Link from 'next/link';
+import { SessionProvider } from "next-auth/react";
 // import {
 //   APIProvider,
 //   Map,
@@ -15,28 +16,26 @@ import Link from "next/link";
 //   Pin,
 //   InfoWindow,
 // } from "@vis.gl/react-google-maps";
-export default function Maps() {
+function Mapas() {
+  
   const [hospitals, setHospitals] = useState([]);
-  const [selectedHospital, setSelectedHospital] = useState(null);
+  const [selectedHospital, setSelectedHospital] = useState(null); 
 
   useEffect(() => {
     // Llamada a la API para obtener los hospitales al cargar el componente
-    axios
-      .post("http://localhost:3001/getHospitals")
-      .then((res) => {
-        console.log(res.data.data);
-        setHospitals(res.data.data); // Almacenar los hospitales en el estado
+    axios.get("/api/hospitals")
+      .then(res => {
+        console.log(res.data.message);
+        setHospitals(res.data.message); // Almacenar los hospitales en el estado
       })
-      .catch((error) => {
-        console.error("Error fetching hospitals:", error);
+      .catch(error => {
+        console.error('Error fetching hospitals:', error);
       });
-  }, []);
+  }, []); 
 
   const handleSelectChange = (event) => {
     const selectedKey = event.target.value;
-    const selectedHospital = hospitals.find(
-      (hospital) => hospital.key === selectedKey
-    );
+    const selectedHospital = hospitals.find(hospital => hospital.key === selectedKey);
     setSelectedHospital(selectedHospital); // Actualizar el estado con el hospital seleccionado
   };
 
@@ -59,98 +58,35 @@ export default function Maps() {
               </select>
             </form>
 
-            {/* <div style={{ maxHeight: "60vh", overflowY: "auto" }}>
-              <span className="Info">Lista de hospitales registrados:</span>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Calle</th>
-                    <th>Colonia</th>
-                    <th>Código Postal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {hospitals.map((hospital) => (
-                    <tr
-                      key={hospital.key}
-                      className="hover:bg-lime-500 transition-color duration-200"
-                    >
-                      <td>
-                        <Link
-                          key={hospital.key}
-                          href={`/registroHospitales/${encodeURIComponent(
-                            hospital.Nombre
-                          )}`}
-                        >
-                          {hospital.Nombre}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          key={hospital.key}
-                          href={`/registroHospitales/${encodeURIComponent(
-                            hospital.Nombre
-                          )}`}
-                        >
-                          {hospital.Calle}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          key={hospital.key}
-                          href={`/registroHospitales/${encodeURIComponent(
-                            hospital.Nombre
-                          )}`}
-                        >
-                          {hospital.Colonia}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          key={hospital.key}
-                          href={`/registroHospitales/${encodeURIComponent(
-                            hospital.Nombre
-                          )}`}
-                        >
-                          {hospital.CodigoPostal}
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div> */}
+        
 
             <div className=" grid grid-cols-4 gap-10 mt-6 mx-auto">
               {hospitals.map((hospital) => (
-                <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                  <img
-                    class="w-full"
+              
+                <div className="max-w-sm rounded overflow-hidden shadow-lg">
+<Link key={hospital.key} href={`/registroHospitales/${encodeURIComponent(hospital.Nombre)}`}>                  <img
+                    className="w-full"
                     src="https://centrourbano.com/revista/wp-content/uploads/hospitaldexoco_g-1.jpg"
                     alt="Sunset in the mountains"
                   ></img>
-                  <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{hospital.Nombre}</div>
-                    <p class="text-gray-700 text-base">{hospital.Calle}</p>
-                    <p class="text-gray-700 text-base">{hospital.Colonia}</p>
-                    <p class="text-gray-700 text-base">
+                  </Link>
+                  <div className="px-6 py-4">
+                    
+                    <div className="font-bold text-xl mb-2">{hospital.Nombre}</div>
+                    <Link key={hospital.key} href={`/registroHospitales/${encodeURIComponent(hospital.Nombre)}`}></Link>
+                    <p className="text-gray-700 text-base">{hospital.Calle}</p>
+                    <p className="text-gray-700 text-base">{hospital.Colonia}</p>
+                    <p className="text-gray-700 text-base">
                       {hospital.CodigoPostal}
                     </p>
+                    <Link key={hospital.key} href={`/registroHospitales/${encodeURIComponent(hospital.Nombre)}`}></Link>
                   </div>
-                  <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      #photography
-                    </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      #travel
-                    </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      #winter
-                    </span>
-                  </div>
+                  
                 </div>
               ))}
+              <div className="max-w-sm rounded overflow-hidden shadow-lg">
+
+              </div>
             </div>
           </div>
         </div>
@@ -158,3 +94,12 @@ export default function Maps() {
     </Layout>
   );
 }
+export default function Maps(){
+  return(
+  <SessionProvider>
+    <Mapas />
+  </SessionProvider>
+  );
+}
+
+  

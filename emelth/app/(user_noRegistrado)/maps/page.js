@@ -5,6 +5,7 @@ React.useLayoutEffect = React.useEffect;
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect } from "react";
+// import db from "@/components/connect";
 import Layout from "@/components/components_usu_no_registrado/layout";
 import axios from 'axios';
 // import {
@@ -20,10 +21,11 @@ export default function maps() {
   const [selectedHospital, setSelectedHospital] = useState('Hospital General Enrique Cabrera'); 
   useEffect(() => {
     // Llamada a la API para obtener los hospitales al cargar el componente
-    axios.post("http://localhost:3001/getHospitals")
+    
+    axios.get("/api/hospitals")
       .then(res => {
-        console.log(res.data.data)
-        setHospitals(res.data.data); // Almacenar los hospitales en el estado
+        console.log(res.data.message)
+        setHospitals(res.data.message); // Almacenar los hospitales en el estado
         
       })
       .catch(error => {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { Inter } from "next/font/google";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import {validateUserLogin} from "@/components/validations/user";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,20 +11,8 @@ export default function signin_signup() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(formData.username, formData.password);
-    let username = formData.username;
-    console.log(username);
-    let password = formData.password;
-    console.log(password);
-    await signIn("credentials",
-      {
-        username:username,
-        password:password,
-        redirect:true,
-        callbackUrl:"/"
-      });
-  };
+    validateUserLogin(formData);
+    };
   const handleRegister = () => {
     const container = document.getElementById("container");
     container.classList.add("active");
