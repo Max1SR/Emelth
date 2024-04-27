@@ -61,13 +61,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderParam() {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <header className="bg-white shadow text-slate-600">
-      <div className="flex h-14 justify-between items-center px-20">
+      <div className="flex h-14 justify-between items-center px-10">
         <a href="/">
-          {/* Cambiar por el svg del logo a rehacer */}
           <Escudo className="h-6 w-6"></Escudo>
         </a>
         {/* Lo siguiente muestra el icono de mdesplegar menu debido al lg:hidden ya que nos esta mencionandop que apartir de 1024px se esconde */}
@@ -82,39 +81,45 @@ export default function HeaderParam() {
           </button>
         </div>
         <div className=" items-center hidden lg:flex justify-between ">
-          <div className="justify-between items-center flex flex-row">
-            <Link
-              className="text-slate-600 mr-6  hover:text-sky-500 transition-colors"
-              href="/HomeAdmin"
-            >
-              Home
-            </Link>
-            <Link
-              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/register"
-            >
-             Registrar
-            </Link>
-            <Link
-              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/registroHospitales"
-            >
-              Registro Hospitales
-            </Link>
+          <div className="justify-between items-center">
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
               href="/"
             >
+              Inicio
+            </Link>
+            <Link
+              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
+              href="/nosotros"
+            >
+              Nosotros
+            </Link>
+            <Link
+              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
+              href="/maps"
+            >
+              Mapa
+            </Link>
+            <Link
+              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
+              href="/contacto"
+            >
+              Contacto
+            </Link>
+            <Link
+              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
+              href="/ayuda"
+            >
               Ayuda
             </Link>
 
-            <button className="ml-6">
-              <img
-                className="h-6 w-6 rounded-full"
-                src="https://ui-avatars.com/api?name=Max+Sanchez"
-                alt="Maximiliano Sanchez"
-              />
-            </button>
+            <a
+              className="text-slate-600 ml-6  hover:text-sky-500 transition-colors"
+              href="/signIn"
+            >
+              Sign in
+            </a>
+            
           </div>
         </div>
       </div>
@@ -144,60 +149,46 @@ export default function HeaderParam() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                        Product
-                        <ChevronDownIcon
-                          className={classNames(
-                            open ? "rotate-180" : "",
-                            "h-5 w-5 flex-none"
-                          )}
-                          aria-hidden="true"
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
-                          <Disclosure.Button
-                            key={item.name}
-                            as="a"
-                            href={item.href}
-                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                          >
-                            {item.name}
-                          </Disclosure.Button>
-                        ))}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
                 <a
-                  href="/home"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Home
+                  Inicio
                 </a>
                 <a
-                  href="/gestionPeticiones"
+                  href="/nosotros"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Gestion de Peticiones
+                  Nosotros
                 </a>
                 <a
-                  href="/historialPeticiones"
+                  href="/maps"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Historial de Peticiones
+                  Mapa
+                </a>
+                <a
+                  href="/contacto"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Contacto
+                </a>
+                <a
+                  href="/ayuda"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Ayuda
                 </a>
               </div>
-              <div className="py-6">
+              <div className="py-6 space-x-1">
                 <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  href="/singIn"
+                  className="-ml-3  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Mi Cuenta
+                  Sign in
                 </a>
+                
+                
               </div>
             </div>
           </div>

@@ -85,21 +85,21 @@ export default function HeaderParam() {
           <div className="justify-between items-center flex flex-row">
             <Link
               className="text-slate-600 mr-6  hover:text-sky-500 transition-colors"
-              href="/HomeAdmin"
+              href="/home"
             >
               Home
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/register"
+              href="/gestionPeticiones"
             >
-             Registrar
+              Gestion de Hospitales
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/registroHospitales"
+              href="/historialPeticiones"
             >
-              Registro Hospitales
+              Historial de emergencias
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
@@ -110,7 +110,7 @@ export default function HeaderParam() {
 
             <button className="ml-6">
               <img
-                className="h-6 w-6 rounded-full"
+                class="h-6 w-6 rounded-full"
                 src="https://ui-avatars.com/api?name=Max+Sanchez"
                 alt="Maximiliano Sanchez"
               />
