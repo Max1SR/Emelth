@@ -10,7 +10,8 @@ export default function nosotros() {
       <main
         className={`flex min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full  sec2 text-slate-800`}
       >
-        <div classList="sec3 "></div>
+        
+        
       </main>
     </Layout>
   );
