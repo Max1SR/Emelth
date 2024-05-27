@@ -166,10 +166,10 @@ function GestionPeticiones() {
   );
 }
 
-export default function GestionPeticionesWrapper() {
-  return (
-    <SessionProvider >
-      <GestionPeticiones />
-    </SessionProvider>
-  );
-}
+// export default function GestionPeticionesWrapper() {
+//   return (
+//     <SessionProvider >
+//       <GestionPeticiones />
+//     </SessionProvider>
+//   );
+// }

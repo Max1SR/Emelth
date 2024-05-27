@@ -64,8 +64,10 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="bg-white shadow text-slate-600">
-      <div className="flex h-14 justify-between items-center px-10">
+    <header className="bg-white shadow text-slate-600 fixed w-full"
+    //className="bg-white shadow text-slate-600"
+    >
+      <div className="flex h-16 justify-between items-center px-10">
         <a href="/">
           <Escudo className="h-6 w-6"></Escudo>
         </a>
@@ -98,7 +100,7 @@ export default function Header() {
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
               href="/maps"
             >
-              Mapa
+              Hospitales
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
@@ -106,12 +108,7 @@ export default function Header() {
             >
               Contacto
             </Link>
-            <Link
-              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/ayuda"
-            >
-              Ayuda
-            </Link>
+            
 
             <a
               className="text-slate-600 ml-6  hover:text-sky-500 transition-colors"
@@ -119,7 +116,6 @@ export default function Header() {
             >
               Sign in
             </a>
-            
           </div>
         </div>
       </div>
@@ -165,7 +161,7 @@ export default function Header() {
                   href="/maps"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Mapa
+                  Hopitales
                 </a>
                 <a
                   href="/contacto"
@@ -173,12 +169,7 @@ export default function Header() {
                 >
                   Contacto
                 </a>
-                <a
-                  href="/ayuda"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Ayuda
-                </a>
+                
               </div>
               <div className="py-6 space-x-1">
                 <a
@@ -187,8 +178,6 @@ export default function Header() {
                 >
                   Sign in
                 </a>
-                
-                
               </div>
             </div>
           </div>

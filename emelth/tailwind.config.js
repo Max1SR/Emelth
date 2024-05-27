@@ -21,6 +21,9 @@ module.exports = {
           to: { transform: "translateX(-100%)" },
         },
       },
+      colors: {
+        emelth: "#1AB7BC", // Aquí defines tu color personalizado en hexadecimal
+      },
     },
   },
   plugins: [],
