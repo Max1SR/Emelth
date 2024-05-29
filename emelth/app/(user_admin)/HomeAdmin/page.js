@@ -3,9 +3,6 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 
 import Layout from "@/components/components_admin/layout";
-import Galerialoca from "@/components/galerialoca";
-import Carrusel from "@/components/carrusel";
-import Home from "@/app/page";
 import { useSession } from 'next-auth/react'
 import { SessionProvider } from "next-auth/react";
 import {useRouter} from 'next/navigation';
