@@ -9,7 +9,6 @@ export default function Layout({ children }) {
     <>
       <Header></Header>
       {children}
-      <Footer></Footer>
     </>
   );
 }

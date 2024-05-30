@@ -1027,7 +1027,7 @@ nav a.active{
 }
 
 .particles{
-    position: relative;
+    position: absolute;
     display: flex;
     z-index: 1;
     padding: 0 20px;
