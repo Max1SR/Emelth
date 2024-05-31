@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
 import { Inter } from "next/font/google";
 import Layout from "@/components/components_usu_no_registrado/layout";
 import "@/styles/styles.css";
-import { PinContainer } from "@/components/3d-pin.tsx";
-import BubbleBackground from "@/components/bubbleBackgrund.tsx";
+import { PinContainer } from "@/components/3d-pin";
+import BubbleBackground from "@/components/bubbleBackgrund";
 
 const inter = Inter({ subsets: ["latin"] });
-export default function nosotros() {
+
+export default function Nosotros() {
   const hospitals = [
     "Hospital General",
     "Hospital General De Ticoman",
@@ -49,21 +51,38 @@ export default function nosotros() {
             </p>
           </div>
           {hospitals.map((hospital) => (
-            <PinContainer title="Ver mapa" className="">
-              <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[15rem] h-[9.5rem]">
-                <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
-                  {hospital}
-                </h3>
-                {/* <div className="text-base !m-0 !p-0 font-normal">
-                <span className="text-slate-500 ">
-                  Customizable Tailwind CSS and Framer Motion Components.
-                </span>
-              </div> */}
-                <div className="flex flex-1 w-full rounded-lg mt-4">
-                  <img className=" object-cover" />
+            <React.Fragment key={hospital}>
+              <PinContainer
+                title="Ver mapa"
+                onClick={() =>
+                  document.getElementById("my_modal_4")?.showModal()
+                }
+              >
+                <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[15rem] h-[9.5rem]">
+                  <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">
+                    {hospital}
+                  </h3>
+                  <div className="flex flex-1 w-full rounded-lg mt-4">
+                    <img
+                      className="object-cover"
+                      alt={`Imagen de ${hospital}`}
+                    />
+                  </div>
                 </div>
-              </div>
-            </PinContainer>
+              </PinContainer>
+
+              <dialog id="my_modal_4" className="modal">
+                <div className="modal-box w-11/12 max-w-5xl">
+                  <h3 className="font-bold text-lg">Hello!</h3>
+                  <p className="py-4">Click the button below to close</p>
+                  <div className="modal-action">
+                    <form method="dialog">
+                      <button className="btn">Close</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+            </React.Fragment>
           ))}
         </div>
       </main>
