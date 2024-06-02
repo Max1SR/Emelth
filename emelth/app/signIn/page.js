@@ -1,19 +1,26 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState} from "react";
 import { Inter } from "next/font/google";
 import "@/styles/iniciarsesion.css";
 import BubbleBackground from "@/components/bubbleBackgrund";
+import {validateUserLogin} from "@/components/validations/user";
 
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function SignInSignUp() {
+  const [formData, setFormData] = useState({ username: "", password: "" });
+
   const containerRef = useRef(null);
   const registerBtnRef = useRef(null);
   const loginBtnRef = useRef(null);
   const closeBtnRef = useRef(null);
   const closeBtn2Ref = useRef(null);
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    validateUserLogin(formData);
+    };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -79,10 +86,18 @@ export default function SignInSignUp() {
             <span className="text-xl text-slate-900">
               Ingresa tu email y contraseña para iniciar sesión
             </span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Contraseña" />
+            <input type="email" placeholder="Email"   value={formData.username}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }/>
+            <input type="password" placeholder="Contraseña"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
             <a href="#">Olvidaste tu contraseña?</a>
-            <button>Iniciar Sesión</button>
+            <button onClick={handleFormSubmit}>Iniciar Sesión</button>
           </form>
         </div>
         <div className="toggle-container">

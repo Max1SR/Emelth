@@ -6,6 +6,7 @@ const passwordRegex = /^.{8,15}$/;
 function validateUserRegister(data){
   console.log(data)
     if(validateUser(data.username,data.password)&&validateRol(data.rol)){
+      
         axios.post("/api/user", data)
           .then(res => {
             let data = res.data;
@@ -29,6 +30,8 @@ async function validateUserLogin(data){
       {
         username:data.username,
         password:data.password,
+        redirect:true,
+        callbackUrl:"/"
         
         
       }); 

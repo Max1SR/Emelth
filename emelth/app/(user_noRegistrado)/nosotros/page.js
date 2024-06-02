@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { Inter } from "next/font/google";
 import Layout from "@/components/components_usu_no_registrado/layout";
 import "@/styles/styles.css";
-import DotLottiePlayer from "@/components/DotLottiePlayer";
+//import '@dotlottie/player-component';
+import { Player } from "@lottiefiles/react-lottie-player";
 import BubbleBackground from "@/components/bubbleBackgrund";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,10 +19,10 @@ export default function Nosotros() {
         <div className="z-0 absolute">
           <BubbleBackground />
         </div>
-        <div class="img-slider z-10">
-          <div class="slide activo">
+        <div className="img-slider z-10">
+          <div className="slide activo">
             <img src="1.jpg" alt="" />
-            <div class="info">
+            <div className="info">
               <h2>Nuestra Misión</h2>
               <p>
                 "Salvar vidas a través de la innovación."
@@ -34,18 +35,18 @@ export default function Nosotros() {
                 críticos.
               </p>
             </div>
-            <DotLottiePlayer
-              class="animationdot1 h-5/6"
+            <Player
+              className="animationdot1"
               src="https://lottie.host/d200cbba-5dab-4256-ba61-ed7eb8422af7/rb5JaJMaXL.json"
               background="transparent"
               speed="1"
               loop
               autoplay
-            ></DotLottiePlayer>
+            ></Player>
           </div>
-          <div class="slide">
+          <div className="slide">
             <img src="2.jpg" alt="" />
-            <div class="info">
+            <div className="info">
               <h2>Nuestra Visión</h2>
               <p>
                 En Emelth, aspiramos a ser pioneros en la integración de
@@ -57,18 +58,18 @@ export default function Nosotros() {
                 proporciona.
               </p>
             </div>
-            <DotLottiePlayer
-              class="animationdot2"
+            <Player
+              className="animationdot2"
               src="https://lottie.host/1c64c34b-1eeb-450f-b811-c513c67bd0ba/kVK6bkmuHA.json"
               background="transparent"
               speed="1"
               loop
               autoplay
-            ></DotLottiePlayer>
+            ></Player>
           </div>
-          <div class="slide">
+          <div className="slide">
             <img src="3.jpg" alt="" />
-            <div class="info">
+            <div className="info">
               <h2>Innovación que cura</h2>
               <p>
                 En Emelth, creemos que la tecnología tiene el poder de
@@ -79,20 +80,20 @@ export default function Nosotros() {
                 emergencia y las instituciones hospitalarias.
               </p>
             </div>
-            <DotLottiePlayer
-              class="animationdot3"
+            <Player
+              className="animationdot3"
               src="https://lottie.host/e8f7dc27-e068-4419-bb27-8eb9eef463c4/7MN2AfzPkj.json"
               background="transparent"
               speed="1"
               loop
               autoplay
-            ></DotLottiePlayer>
+            ></Player>
           </div>
-          <div class="slide">
+          <div className="slide">
             <img src="4.jpg" alt="" />
-            <div class="info">
+            <div className="info">
               <h2>Ubicando la ayuda</h2>
-              <p class="responsive-text1">
+              <p className="responsive-text1">
                 Utilizamos las últimas innovaciones en geolocalización para
                 desarrollar un software que no solo responde eficazmente en
                 momentos críticos, sino que eleva la calidad del cuidado médico
@@ -102,28 +103,28 @@ export default function Nosotros() {
                 preciso.
               </p>
             </div>
-            <DotLottiePlayer
-              class="animationdot4"
+            <Player
+              className="animationdot4"
               src="https://lottie.host/43409ce2-23e6-443f-b449-99e86304d804/L9FfxkhoW3.json"
               background="transparent"
               speed="1"
               loop
               autoplay
-            ></DotLottiePlayer>
-            <DotLottiePlayer
-              class="animationdot5"
+            ></Player>
+            <Player
+              className="animationdot5"
               src="https://lottie.host/a1053985-c1d4-4121-9e19-1f74b363dc3b/Rcsk2J4xpq.json"
               background="transparent"
               speed="1"
               loop
               autoplay
-            ></DotLottiePlayer>
+            ></Player>
           </div>
-          <div class="slide">
+          <div className="slide">
             <img src="5.jpg" alt="" />
-            <div class="info">
+            <div className="info">
               <h2>Mirando hacia el Futuro</h2>
-              <p class="responsive-text2">
+              <p className="responsive-text2">
                 Con cada actualización de nuestro software y cada nuevo servicio
                 que implementamos, nos esforzamos por estar a la vanguardia de
                 la tecnología médica de emergencia. Mientras expandimos nuestra
@@ -132,22 +133,22 @@ export default function Nosotros() {
                 vulnerables. En Emelth buscamos crear un futuro donde la
                 atención médica de emergencia sea más rápida, segura y eficaz.
               </p>
-              <DotLottiePlayer
-                class="animationdot6"
+              <Player
+                className="animationdot6"
                 src="https://lottie.host/225e3f4f-ed5a-420a-883c-4304397c60f2/CU5Qji6Sbz.json"
                 background="transparent"
                 speed="1"
                 loop
                 autoplay
-              ></DotLottiePlayer>
+              ></Player>
             </div>
           </div>
-          <div class="navigation">
-            <div class="btn-slide activo"></div>
-            <div class="btn-slide"></div>
-            <div class="btn-slide"></div>
-            <div class="btn-slide"></div>
-            <div class="btn-slide"></div>
+          <div className="navigation">
+            <div className="btn-slide activo"></div>
+            <div className="btn-slide"></div>
+            <div className="btn-slide"></div>
+            <div className="btn-slide"></div>
+            <div className="btn-slide"></div>
           </div>
         </div>
       </main>
