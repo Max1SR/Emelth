@@ -32,6 +32,7 @@ async function validateUserLogin(data){
         password:data.password,
         redirect:true,
         callbackUrl:"/"
+      
         
         
       }); 

@@ -3,8 +3,8 @@ import { conn } from "@/lib/mysql";
 import bcrypt from "bcrypt";
 import util from "util";
 
+const connection = await conn.getConnection();
 
-const queryAsync = util.promisify(conn.query).bind(conn);
 export const options = {
   providers: [
     CredentialsProvider({
@@ -15,13 +15,12 @@ export const options = {
       },
       async authorize(credentials) {
         const{username,password}=credentials;
-        console.log(credentials)
+        
         if (username) {
           const checkEmailSql = 'SELECT * FROM usuario WHERE usu_correo = ?';
           try {
             
-            const result = await queryAsync(checkEmailSql, [username]);
-            console.log(result)
+            const [result] = await connection.query(checkEmailSql, [username]);
         if (result.length > 0) {
             const match = await bcrypt.compare(password.toString(), result[0].usu_pass);
             if (match) {
@@ -30,16 +29,19 @@ export const options = {
                 name: `${result[0].id_rol}`,
                 email: `${result[0].id_wsid}`
             }
-            console.log(user)
+            connection.release();
                 return user
+
             } else {
+              connection.release();
                 return null
             }
         } else {
+          connection.release();
             return null
         }
           } catch (err) {
-            console.error(err);
+           connection.release();
             return null;
           }
         }

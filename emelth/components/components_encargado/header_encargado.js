@@ -19,6 +19,7 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+import LogoutButton from "../signoutButton";
 
 const products = [
   {
@@ -97,20 +98,15 @@ export default function HeaderParam() {
             </Link>
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/historialPeticiones"
+              href="/aceptadas"
             >
-              Historial de Peticiones
+              Peticiones aceptadas 
             </Link>
-            <Link
-              className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
-              href="/"
-            >
-              Ayuda
-            </Link>
-
+            
+            <LogoutButton></LogoutButton>
             <button className="ml-6">
               <img
-                class="h-6 w-6 rounded-full"
+                className="h-6 w-6 rounded-full"
                 src="https://ui-avatars.com/api?name=Max+Sanchez"
                 alt="Maximiliano Sanchez"
               />
@@ -144,34 +140,7 @@ export default function HeaderParam() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                        Product
-                        <ChevronDownIcon
-                          className={classNames(
-                            open ? "rotate-180" : "",
-                            "h-5 w-5 flex-none"
-                          )}
-                          aria-hidden="true"
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
-                          <Disclosure.Button
-                            key={item.name}
-                            as="a"
-                            href={item.href}
-                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                          >
-                            {item.name}
-                          </Disclosure.Button>
-                        ))}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
+                
                 <a
                   href="/home"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
@@ -184,21 +153,18 @@ export default function HeaderParam() {
                 >
                   Gestion de Peticiones
                 </a>
+              
                 <a
-                  href="/historialPeticiones"
+                  href="/aceptadas"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Historial de Peticiones
+                 Peticiones aceptadas
+
                 </a>
+              </div><div>
+              <LogoutButton></LogoutButton>
               </div>
-              <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Mi Cuenta
-                </a>
-              </div>
+             
             </div>
           </div>
         </Dialog.Panel>

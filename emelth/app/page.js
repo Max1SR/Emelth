@@ -21,7 +21,7 @@ function Home() {
         router.push("/home");
       }
       if (rol === "1") {
-        router.push("/HomeAdmin");
+        router.push("/crear")
       }
 
       // Finaliza la carga cuando se ha realizado la comprobación

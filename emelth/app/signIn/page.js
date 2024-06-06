@@ -20,6 +20,7 @@ export default function SignInSignUp() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     validateUserLogin(formData);
+
     };
 
   useEffect(() => {

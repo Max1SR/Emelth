@@ -1,6 +1,8 @@
 'use client'
 import { Inter } from "next/font/google";
 import Layout from "@/components/components_encargado/layout";
+
+
 import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });

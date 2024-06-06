@@ -1,122 +1,134 @@
-"use client"
-import React,{useState} from "react";
+"use client";
 
+import React, { useRef, useEffect, useState} from "react";
 import { Inter } from "next/font/google";
-import { signIn } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import "@/styles/iniciarsesion.css";
+import BubbleBackground from "@/components/bubbleBackgrund";
+import {validateUserLogin} from "@/components/validations/user";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function signin_signup() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const handleFormSubmit = async(e) => {
+export default function SignInSignUp() {
+  const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const containerRef = useRef(null);
+  const registerBtnRef = useRef(null);
+  const loginBtnRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  const closeBtn2Ref = useRef(null);
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log(formData.username,formData.password);
-    let username=formData.username;
-    console.log(username)
-    let password=formData.password;
-    console.log(password)
-    await signIn("credentials",{
-      username:username ,
-      password:password,
-      redirect:true,
-      callbackUrl:'/'
-      
+    validateUserLogin(formData);
 
-    })
+    };
 
-    
-  };
-  const handleRegister = () => {
-    const container = document.getElementById("container");
-    container.classList.add("active");
-  };
+  useEffect(() => {
+    const container = containerRef.current;
+    const registerBtn = registerBtnRef.current;
+    const loginBtn = loginBtnRef.current;
+    const closeBtn = closeBtnRef.current;
+    const closeBtn2 = closeBtn2Ref.current;
 
-  const handleLogin = () => {
-    const container = document.getElementById("container");
-    container.classList.remove("active");
-  };
+    const handleRegisterClick = () => {
+      container.classList.add("active");
+    };
+
+    const handleLoginClick = () => {
+      container.classList.remove("active");
+    };
+
+    const handleCloseClick = () => {
+      window.location.href = "/";
+    };
+
+    registerBtn.addEventListener("click", handleRegisterClick);
+    loginBtn.addEventListener("click", handleLoginClick);
+    closeBtn.addEventListener("click", handleCloseClick);
+    closeBtn2.addEventListener("click", handleCloseClick);
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      registerBtn.removeEventListener("click", handleRegisterClick);
+      loginBtn.removeEventListener("click", handleLoginClick);
+      closeBtn.removeEventListener("click", handleCloseClick);
+      closeBtn2.removeEventListener("click", handleCloseClick);
+    };
+  }, []);
 
   return (
-    <div>
-      <header className="bg-white shadow text-slate-600">
-        <div className="flex h-14 items-center px-10 space-x-4">
-          <a href="/">
-          </a>
-          <p className="text-xl text-gray-900 font-medium">Emelth</p>
+    <main>
+      <div className="-ml-96">
+        <BubbleBackground />
+      </div>
+      <div className="pop-up" id="pop-up" ref={containerRef}>
+        <div className="form-container sign-up ">
+          <div className="close-btn" ref={closeBtnRef}>
+            &times;
+          </div>
+          <form>
+            <h1 className="text-3xl font-bold text-slate-900">
+              Crea una cuenta
+            </h1>
+            <span className="text-slate-900">
+              Registra tu nombre, email y una contraseña
+            </span>
+            <input type="text" placeholder="Nombre" />
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Contraseña" />
+            <button>Registrate</button>
+          </form>
         </div>
-      </header>
-      <main
-        className={`items-center justify-between px-16 py-14 ${inter.className} h-[93vh] bg-slate-100 text-slate-800`}
-      >
-        <div className="flex flex-row h-full ">
-          <div className="w-1/2 h-full bg-slate-200 p-24 px-32 rounded-l-3xl flex flex-col justify-center">
-            <form className="space-y-8">
-              <div className="flex flex-col space-y-2">
-                <h1 className="text-3xl font-semibold">Iniciar sesión</h1>
-                <p className="text-base font-medium text-slate-600">
-                  Bienvenido de nuevo
-                </p>
-              </div>
-              <div className="flex flex-col space-y-2">
-                <div className="form-heading">
-                  <p className="heading-input">Correo electrónico</p>
-                </div>
-                <input 
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  type="email"
-                  placeholder="Escriba su correo electrónico"
-                  className="h-9 rounded-md px-3"
-                />
-              </div>
-              <div className="flex flex-col space-y-2">
-                <div className="form-heading">
-                  <p className="heading-input">Contraseña</p>
-                </div>
-                <input
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  type="password"
-                  placeholder="Escriba su contraseña"
-                  className="h-9 rounded-md px-3"
-                />
-                <a
-                  href="#"
-                  className="text-sm ml-auto hover:text-lime-600 text-lime-900  hover:underline"
-                >
-                  Olvidé mi contraseña
-                </a>
-              </div>
-              <button 
-              onClick={(handleFormSubmit)}
-              className="w-full h-9 bg-green-600 rounded-md">
-                Ingresar
+        <div className="form-container sign-in">
+          <form>
+            <h1 className="text-3xl font-bold text-slate-900">
+              Iniciar Sesión
+            </h1>
+            <span className="text-xl text-slate-900">
+              Ingresa tu email y contraseña para iniciar sesión
+            </span>
+            <input type="email" placeholder="Email"   value={formData.username}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }/>
+            <input type="password" placeholder="Contraseña"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+            <a href="#">Olvidaste tu contraseña?</a>
+            <button onClick={handleFormSubmit}>Iniciar Sesión</button>
+          </form>
+        </div>
+        <div className="toggle-container">
+          <div className="close-btn2" ref={closeBtn2Ref}>
+            &times;
+          </div>
+          <div className="toggle1">
+            <div className="toggle-panel toggle-left">
+              <h1 className="text-3xl font-bold">Bienvenido de Nuevo!</h1>
+              <p>
+                Ingrese sus datos personales para utilizar todas las funciones
+                del sitio
+              </p>
+              <button className="hidde" id="login" ref={loginBtnRef}>
+                Inicia Sesión
               </button>
-              <div className="flex space-x-2 text-sm">
-                <h1>¿Aún no tienes una cuenta?</h1>
-                <a href="/" className="hover:text-lime-600">
-                  Registrate
-                </a>
-              </div>
-            </form>
-          </div>
-          <div className="w-1/2 h-full bg-slate-800 text-slate-100 p-24 rounded-r-3xl flex flex-col justify-center space-y-5">
-            <div className="flex space-x-2 ">
-              <p className="text-2xl font-medium">Emelth</p>
             </div>
-            <p className="text-4xl font-semibold">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
-            <p className="font-light text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              scelerisque pellentesque urna vel feugiat. Cras euismod hendrerit
-              ligula, ut commodo massa volutpat eu. Donec at viverra nibh.
-            </p>
+            <div className="toggle-panel toggle-right">
+              <h1 className="text-3xl font-bold">Hola, bienvenid@!</h1>
+              <p>
+                Regístrese con sus datos personales para utilizar todas las
+                funciones del sitio
+              </p>
+              <button className="hidde" id="register" ref={registerBtnRef}>
+                Registrate
+              </button>
+            </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
