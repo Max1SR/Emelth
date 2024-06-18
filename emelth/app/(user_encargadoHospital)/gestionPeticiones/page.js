@@ -11,7 +11,7 @@ import {useRouter} from 'next/navigation';
 import Error from 'next/error';
 
 
-const socket = io.connect("https://www.emelthserver.cloud");
+const socket = io.connect('https://www.emelthserver.cloud',{secure:true});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,11 +53,10 @@ function GestionPeticiones() {
         const websocketid=res.data.websocketid  
 
         const rol = session.user.name
+        console.log(websocketid)
           socket.emit('client_id', { client_id: websocketid , rol:rol});
       })
-      const handleReceiveUnread=(data)=>{
-        let unread=data.message
-      }
+    
       const handleReceiveMessage = (data) => {
         let request1 = data.message;
         if (request1.Type === "request") {
@@ -65,21 +64,15 @@ function GestionPeticiones() {
         }
       };
       const handleRequests = (data) => {
-       
+       console.log(data)
   // Update the state with the array of requests
         setRequests(data);
       };
      
       
       
-      socket.on("connect",()=>{
-      
-        socket.emit("client_id",
-          { client_id: websocketid }
-            )      
-          })
+  
       socket.on("recieve_message", handleReceiveMessage);
-      socket.on("unread_petitions", handleReceiveUnread);
       socket.on("server_requests", handleRequests);
       socket.on("server_message", (data) => {
         console.log(data);

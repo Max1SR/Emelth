@@ -1,9 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import React from "react";
-import Layout from "@/components/components_encargado/layout";
 import axios from "axios";
-import { Inter } from "next/font/google";
 import io from "socket.io-client";
 import { useSession } from 'next-auth/react'
 import { SessionProvider } from "next-auth/react";
