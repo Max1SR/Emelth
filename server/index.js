@@ -109,50 +109,86 @@ io.on("connection", (socket) => {
 
 
   socket.on("send_message", async (data) => {
-    index = Object.keys(unreadPetitions).length;
-    try {
-      const connection = await pool.getConnection();
-      const [result] = await connection.execute(
-        "INSERT INTO persona (per_nombre, per_appat, per_apmat) VALUES (?, ?, ?)",
-        [data.message.Name, data.message.LastName, data.message.LastName2]
-      );
-      const insertedId = result.insertId;
-      console.log("ID del registro insertado:", insertedId);
+    const connection = await pool.getConnection();
+    
 
-      // Ejecutar la segunda consulta solo si la primera se realizó con éxito
-      if (insertedId) {
-        const [result2] = await connection.execute(
-          "INSERT INTO registropaciente (pac_rango, id_per, pac_sexo, pac_edad, pac_padecimiento, id_esp, id_est) VALUES (?, ?, ?, ?, ?, ?, ?)",
-          [
-            data.message.Emergency,
-            insertedId,
-            data.message.Sex,
-            data.message.Age,
-            data.message.Description,
-            1,
-            1,
-          ]
-        );
-        const id = result2.insertId;
-        console.log(id);
-        await connection.execute(
-          "INSERT INTO petresemi (id_pac, id_emi) VALUES (?, ?)",
-          [id, data.session]
-        );
-      }
-      connection.release();
-    } catch (error) {
-      console.error("Error al guardar el mensaje:", error);
-    }
-    try {
-      const connection = await pool.getConnection();
-      const [rows] = await connection.execute("SELECT * FROM vwencargado");
-      connection.release();
+    const latitud_origen = data.location.latitude;
+    const longitud_origen = data.location.longitude;
+    const radio = 5; // Radio en kilómetros
 
-      socket.broadcast.emit("server_requests", rows);
-    } catch (error) {
-      console.error("Error al guardar el mensaje:", error);
-    }
+    const distanceSql = `
+      SELECT
+        id_cor,
+        latitud,
+        longitud,
+        (6371 * acos(
+            cos(radians(?)) * cos(radians(latitud)) * cos(radians(longitud) - radians(?)) +
+            sin(radians(?)) * sin(radians(latitud))
+        )) AS distancia
+      FROM
+        coordenadas
+      WHERE
+        latitud BETWEEN ? AND ?
+        AND longitud BETWEEN ? AND ?
+      ORDER BY
+        distancia
+      LIMIT 1;
+    `;
+
+    const minLat = latitud_origen - radio / 111.045;
+    const maxLat = latitud_origen + radio / 111.045;
+    const minLng = longitud_origen - radio / (111.045 * Math.cos(latitud_origen * Math.PI / 180));
+    const maxLng = longitud_origen + radio / (111.045 * Math.cos(latitud_origen * Math.PI / 180));
+
+    const [nearestPoint] = await connection.execute(distanceSql, [
+      latitud_origen, longitud_origen, latitud_origen,
+      minLat, maxLat, minLng, maxLng
+    ]);
+
+    console.log("Punto más cercano:", nearestPoint[0].id_cor);
+    // try {
+    //  
+    //   const [result] = await connection.execute(
+    //     "INSERT INTO persona (per_nombre, per_appat, per_apmat) VALUES (?, ?, ?)",
+    //     [data.message.Name, data.message.LastName, data.message.LastName2]
+    //   );
+    //   const insertedId = result.insertId;
+    //   console.log("ID del registro insertado:", insertedId);
+
+    //   // Ejecutar la segunda consulta solo si la primera se realizó con éxito
+    //   if (insertedId) {
+    //     const [result2] = await connection.execute(
+    //       "INSERT INTO registropaciente (pac_rango, id_per, pac_sexo, pac_edad, pac_padecimiento, id_esp, id_est) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    //       [
+    //         data.message.Emergency,
+    //         insertedId,
+    //         data.message.Sex,
+    //         data.message.Age,
+    //         data.message.Description,
+    //         1,
+    //         1,
+    //       ]
+    //     );
+    //     const id = result2.insertId;
+    //     console.log(id);
+    //     await connection.execute(
+    //       "INSERT INTO petresemi (id_pac, id_emi) VALUES (?, ?)",
+    //       [id, data.session]
+    //     );
+    //   }
+    //   connection.release();
+    // } catch (error) {
+    //   console.error("Error al guardar el mensaje:", error);
+    // }
+    // try {
+    //   const connection = await pool.getConnection();
+    //   const [rows] = await connection.execute("SELECT * FROM vwencargado");
+    //   connection.release();
+
+    //   socket.broadcast.emit("server_requests", rows);
+    // } catch (error) {
+    //   console.error("Error al guardar el mensaje:", error);
+    // }
   });
 
   socket.on("accept_message", async (data) => {

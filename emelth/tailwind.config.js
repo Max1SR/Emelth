@@ -27,6 +27,9 @@ module.exports = {
       colors: {
         emelth: "#1AB7BC", // Aquí defines tu color personalizado en hexadecimal
       },
+      clipPath: {
+        "clip-rect": "rect(0, 0, 0, 0)",
+      },
     },
   },
   plugins: [flowbite.plugin(), require("daisyui")],

@@ -2,9 +2,12 @@
 
 import React, { useRef, useEffect, useState} from "react";
 import { Inter } from "next/font/google";
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { signIn } from "next-auth/react";
+
+const passwordRegex = /^.{8,15}$/;
 import "@/styles/iniciarsesion.css";
 import BubbleBackground from "@/components/bubbleBackgrund";
-import {validateUserLogin} from "@/components/validations/user";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,6 +25,19 @@ export default function SignInSignUp() {
     validateUserLogin(formData);
 
     };
+    function validateUser(user, password) {
+      return emailRegex.test(user) && passwordRegex.test(password);
+    }
+    async function validateUserLogin(data) {
+      if (validateUser(data.username, data.password)) {
+        await signIn("credentials", {
+          username: data.username,
+          password: data.password,
+          redirect: false,
+          callbackUrl: "https://www.emelth.life/",
+        });
+      }
+    }
 
   useEffect(() => {
     const container = containerRef.current;

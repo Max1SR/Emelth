@@ -1,5 +1,4 @@
 import axios from "axios";
-import { signIn } from "next-auth/react";
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^.{8,15}$/;
 
@@ -23,24 +22,15 @@ function validateUserRegister(data) {
     return "Rellene todos los campos correctamente";
   }
 }
-async function validateUserLogin(data) {
-  if (validateUser(data.username, data.password)) {
-    await signIn("credentials", {
-      username: data.username,
-      password: data.password,
-      redirect: true,
-      callbackUrl: "https://www.emelth.life",
-    });
-  }
-}
 
 function validateUser(user, password) {
   return emailRegex.test(user) && passwordRegex.test(password);
 }
+
 
 function validateRol(rol) {
   let number = parseInt(rol);
   return number > 0 && number < 4;
 }
 
-export { validateUserRegister, validateUserLogin };
+export { validateUserRegister};

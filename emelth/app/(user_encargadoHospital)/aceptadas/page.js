@@ -56,7 +56,12 @@ function Accepted() {
   }, [session]);
 
   if (loading) {
-    return <div>Cargando...</div>; // Show loading indicator
+    return (
+      <div className="flex items-center justify-center min-h-screen min-w-screen bg-white">
+        <div className="relative h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+        <div className="absolute text-2xl font-bold text-primary">EH</div>
+      </div>
+    ); // Muestra un indicador de carga mientras se realiza la comprobación
   }
 
   return (
