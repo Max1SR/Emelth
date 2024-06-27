@@ -93,10 +93,11 @@ export default function Header({ setIsNavbarHovered }) {
 
         <li>
           <div>
-            <span className="icon flex items-center justify-center">
-              <IoLogOutOutline size={"1.5em"} />
-            </span>
             <Logoutbutton>
+              <span className="icon flex items-center justify-center">
+                <IoLogOutOutline size={"1.5em"} />
+              </span>
+
               <span className="title">Cerrar sesión</span>
             </Logoutbutton>
           </div>

@@ -883,6 +883,34 @@ body {
   background-size: 400% 400%;
 }
 
+
+/* width */
+.scrollH::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 50px;
+}
+
+/* Track */
+ .scrollH::-webkit-scrollbar-track {
+  background: #ffff;
+}
+
+/* Handle */
+ .scrollH::-webkit-scrollbar-thumb {
+  background: #e53a76;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+ .scrollH::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient);
+  animation: gradient 5s ease infinite;
+  background-attachment: fixed;
+  background-size: 400% 400%;
+}
+
+
+
 .peticiones table {
   width: 100%;
   border-collapse: collapse;
