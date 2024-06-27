@@ -82,14 +82,6 @@ export default function Header({ setIsNavbarHovered }) {
           </a>
         </li>
         <li>
-          <a href="/Ayuda">
-            <span className="icon flex items-center justify-center">
-              <IoHelpOutline size={"1.5em"} />
-            </span>
-            <span className="title">Ayuda</span>
-          </a>
-        </li>
-        <li>
           <a href="/register">
             <span className="icon flex items-center justify-center">
               <TbUsersPlus size={"1.5em"} />
@@ -98,7 +90,16 @@ export default function Header({ setIsNavbarHovered }) {
           </a>
         </li>
         <li>
-          <a href="index.html">
+          <a href="/Ayuda">
+            <span className="icon flex items-center justify-center">
+              <IoHelpOutline size={"1.5em"} />
+            </span>
+            <span className="title">Ayuda</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/">
             <span className="icon flex items-center justify-center">
               <IoLogOutOutline size={"1.5em"} />
             </span>

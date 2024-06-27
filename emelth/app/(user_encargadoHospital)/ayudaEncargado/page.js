@@ -49,19 +49,24 @@ export default function Ayuda() {
                 </div>
               </div>
             </div>
-            
+
             <h1 className="ml-11 font-bold text-4xl text-zinc-500">
               Preguntas Frecuentes
             </h1>
             <div class="details2">
               <div class="contenedor">
                 <div class="tab1">
-                  <input type="radio" name="acc" id="acc1" />
-                  <label for="acc1">
+                  <input
+                    type="radio"
+                    name="acc"
+                    id="acc1"
+                    className="appearance-none"
+                  />
+                  <label htmlFor="acc1">
                     <h2 className="h-full">01</h2>
                     <h3>Pregunta 1?</h3>
                   </label>
-                  <div class="content">
+                  <div className="content">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut faucibus felis vestibulum, bibendum erat eu, egestas
@@ -74,13 +79,13 @@ export default function Ayuda() {
                     </p>
                   </div>
                 </div>
-                <div class="tab1">
+                <div className="tab1">
                   <input type="radio" name="acc" id="acc2" />
-                  <label for="acc2">
+                  <label htmlFor="acc2">
                     <h2>02</h2>
                     <h3>Pregunta 2?</h3>
                   </label>
-                  <div class="content">
+                  <div className="content">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut faucibus felis vestibulum, bibendum erat eu, egestas
@@ -99,13 +104,13 @@ export default function Ayuda() {
                     </p>
                   </div>
                 </div>
-                <div class="tab1">
+                <div className="tab1">
                   <input type="radio" name="acc" id="acc3" />
-                  <label for="acc3">
+                  <label htmlFor="acc3">
                     <h2>03</h2>
                     <h3>Pregunta 3?</h3>
                   </label>
-                  <div class="content">
+                  <div className="content">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut faucibus felis vestibulum, bibendum erat eu, egestas
@@ -118,13 +123,13 @@ export default function Ayuda() {
                     </p>
                   </div>
                 </div>
-                <div class="tab1">
+                <div className="tab1">
                   <input type="radio" name="acc" id="acc4" />
-                  <label for="acc4">
+                  <label htmlFor="acc4">
                     <h2>04</h2>
                     <h3>Pregunta 4?</h3>
                   </label>
-                  <div class="content">
+                  <div className="content">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut faucibus felis vestibulum, bibendum erat eu, egestas
@@ -132,13 +137,13 @@ export default function Ayuda() {
                     </p>
                   </div>
                 </div>
-                <div class="tab1">
+                <div className="tab1">
                   <input type="radio" name="acc" id="acc5" />
-                  <label for="acc5">
+                  <label htmlFor="acc5">
                     <h2>05</h2>
                     <h3>Pregunta 5?</h3>
                   </label>
-                  <div class="content">
+                  <div className="content">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut faucibus felis vestibulum, bibendum erat eu, egestas

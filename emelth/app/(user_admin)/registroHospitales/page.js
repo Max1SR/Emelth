@@ -44,9 +44,9 @@ function Mapas() {
   return (
     <Layout>
       <main
-        className={`min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800`}
+        className={`min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800 `}
       >
-        <div className="flex flex-row h-full w-full overflow-auto">
+        <div className="flex flex-row h-full w-full ">
           <div className="w-full h-full rounded-3xl p-5 ">
             <form className="flex items-center space-x-3">
               <select name="mapa" id="mapaWi" onChange={handleSelectChange}>
