@@ -9,6 +9,8 @@ import Layout from "@/components/components_admin/layout";
 import axios from "axios";
 import Link from "next/link";
 import { SessionProvider } from "next-auth/react";
+import { FaPlus } from "react-icons/fa6";
+
 // import {
 //   APIProvider,
 //   Map,
@@ -47,7 +49,7 @@ function Mapas() {
         className={`min-h-screen flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800 `}
       >
         <div className="flex flex-row h-full w-full ">
-          <div className="w-full h-full rounded-3xl p-5 ">
+          <div className="w-full  rounded-3xl p-5 overflow-y-auto h-[85vh]">
             <form className="flex items-center space-x-3">
               <select name="mapa" id="mapaWi" onChange={handleSelectChange}>
                 <option value="">Seleccionar hospital</option>
@@ -102,7 +104,11 @@ function Mapas() {
                   </div>
                 </div>
               ))}
-              <div className="max-w-sm rounded overflow-hidden shadow-lg"></div>
+              <div className="max-w-sm rounded overflow-hidden shadow-lg ">
+                <button className="h-full w-full flex justify-center items-center">
+                  <FaPlus size={"3em"} />
+                </button>
+              </div>
             </div>
           </div>
         </div>

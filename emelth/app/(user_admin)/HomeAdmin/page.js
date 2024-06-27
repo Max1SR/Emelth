@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Avvatars from "avvvatars-react";
+//import Avvatars from "avvvatars-react";
 import "@/styles/admin.css";
 
 const inter = Inter({ subsets: ["latin"] });

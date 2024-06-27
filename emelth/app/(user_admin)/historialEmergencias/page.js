@@ -8,9 +8,9 @@ export default function page() {
       <main
         className={` min-h-screen px-16 py-14 h-full bg-slate-100`}
       >
-        <section id="peticiones" class="peticiones">
-          <div class="recentpetitions">
-            <div class="cardHeader">
+        <section id="peticiones" className="peticiones">
+          <div className="recentpetitions">
+            <div className="cardHeader">
               <h2>Peticiones Recientes</h2>
             </div>
             <table>
@@ -28,7 +28,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -36,7 +36,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
                 <tr>
@@ -52,7 +52,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -60,7 +60,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -68,7 +68,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -76,7 +76,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
                 <tr>
@@ -84,7 +84,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -92,7 +92,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -100,7 +100,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -108,7 +108,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
                 <tr>
@@ -116,7 +116,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -124,7 +124,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -132,7 +132,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
                 <tr>
@@ -140,7 +140,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -148,7 +148,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -156,7 +156,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -164,7 +164,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
                 <tr>
@@ -172,7 +172,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -180,7 +180,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status aceptado">Aceptado</span>
+                    <span className="status aceptado">Aceptado</span>
                   </td>
                 </tr>
                 <tr>
@@ -188,7 +188,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status Completado">Completado</span>
+                    <span className="status Completado">Completado</span>
                   </td>
                 </tr>
                 <tr>
@@ -196,7 +196,7 @@ export default function page() {
                   <td>Gustavo A. Madero</td>
                   <td>Hospital General La Villa</td>
                   <td>
-                    <span class="status pendiente">Pendiente</span>
+                    <span className="status pendiente">Pendiente</span>
                   </td>
                 </tr>
               </tbody>
