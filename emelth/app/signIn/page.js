@@ -33,7 +33,7 @@ export default function SignInSignUp() {
         await signIn("credentials", {
           username: data.username,
           password: data.password,
-          
+          redirect:false,
         });
       }
     }

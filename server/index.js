@@ -83,18 +83,30 @@ io.on("connection", (socket) => {
           const userid = clientData.id;
         ;
           const [datarows] = await connection.execute(
-            "SELECT * FROM respuestapet WHERE id_emi = ?",
+            "SELECT * FROM ConNombrewe WHERE id_emi = ?",
             [userid]
           );
-
+          
+            console.log(datarows);
           if (datarows.length > 0) {
             io.to(clientData.client_id).emit("server_requests", datarows);
           }
           connection.release();
           break;
         case "3":
-          const [rows] = await connection.query("SELECT * FROM vwencargado");
+          
+          const ws=clientData.ws
+          const query = `
+          SELECT *
+          FROM petresemi p
+          JOIN vwencargado e ON p.id_pac = e.Folio
+          WHERE p.id_res = ?;
+          `;
+  
+          const [rows] = await connection.query(query, [ws]);
           connection.release();
+  
+  
 
           // Enviar las peticiones sin leer al cliente
           io.to(clientData.client_id).emit("server_requests", rows);
@@ -110,86 +122,100 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", async (data) => {
     const connection = await pool.getConnection();
-    
-
+  
     const latitud_origen = data.location.latitude;
     const longitud_origen = data.location.longitude;
     const radio = 5; // Radio en kilómetros
-
+  
     const distanceSql = `
       SELECT
-        id_cor,
-        latitud,
-        longitud,
+        c.id_cor,
+        c.latitud,
+        c.longitud,
         (6371 * acos(
-            cos(radians(?)) * cos(radians(latitud)) * cos(radians(longitud) - radians(?)) +
-            sin(radians(?)) * sin(radians(latitud))
-        )) AS distancia
+            cos(radians(?)) * cos(radians(c.latitud)) * cos(radians(c.longitud) - radians(?)) +
+            sin(radians(?)) * sin(radians(c.latitud))
+        )) AS distancia,
+        u.id_wsid
       FROM
-        coordenadas
+        coordenadas c
+      JOIN
+        hospital h ON c.id_cor = h.id_cor
+      JOIN
+        encargadohos e ON h.id_hos = e.id_hos
+      JOIN
+        usuario u ON e.id_usu = u.id_usu
       WHERE
-        latitud BETWEEN ? AND ?
-        AND longitud BETWEEN ? AND ?
+        c.latitud BETWEEN ? AND ?
+        AND c.longitud BETWEEN ? AND ?
       ORDER BY
         distancia
       LIMIT 1;
     `;
-
+  
     const minLat = latitud_origen - radio / 111.045;
     const maxLat = latitud_origen + radio / 111.045;
     const minLng = longitud_origen - radio / (111.045 * Math.cos(latitud_origen * Math.PI / 180));
     const maxLng = longitud_origen + radio / (111.045 * Math.cos(latitud_origen * Math.PI / 180));
-
-    const [nearestPoint] = await connection.execute(distanceSql, [
-      latitud_origen, longitud_origen, latitud_origen,
-      minLat, maxLat, minLng, maxLng
-    ]);
-
-    console.log("Punto más cercano:", nearestPoint[0].id_cor);
-    // try {
-    //  
-    //   const [result] = await connection.execute(
-    //     "INSERT INTO persona (per_nombre, per_appat, per_apmat) VALUES (?, ?, ?)",
-    //     [data.message.Name, data.message.LastName, data.message.LastName2]
-    //   );
-    //   const insertedId = result.insertId;
-    //   console.log("ID del registro insertado:", insertedId);
-
-    //   // Ejecutar la segunda consulta solo si la primera se realizó con éxito
-    //   if (insertedId) {
-    //     const [result2] = await connection.execute(
-    //       "INSERT INTO registropaciente (pac_rango, id_per, pac_sexo, pac_edad, pac_padecimiento, id_esp, id_est) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    //       [
-    //         data.message.Emergency,
-    //         insertedId,
-    //         data.message.Sex,
-    //         data.message.Age,
-    //         data.message.Description,
-    //         1,
-    //         1,
-    //       ]
-    //     );
-    //     const id = result2.insertId;
-    //     console.log(id);
-    //     await connection.execute(
-    //       "INSERT INTO petresemi (id_pac, id_emi) VALUES (?, ?)",
-    //       [id, data.session]
-    //     );
-    //   }
-    //   connection.release();
-    // } catch (error) {
-    //   console.error("Error al guardar el mensaje:", error);
-    // }
-    // try {
-    //   const connection = await pool.getConnection();
-    //   const [rows] = await connection.execute("SELECT * FROM vwencargado");
-    //   connection.release();
-
-    //   socket.broadcast.emit("server_requests", rows);
-    // } catch (error) {
-    //   console.error("Error al guardar el mensaje:", error);
-    // }
+  
+    try {
+      const [nearestPoints] = await connection.execute(distanceSql, [
+        latitud_origen, longitud_origen, latitud_origen,
+        minLat, maxLat, minLng, maxLng
+      ]);
+  
+      console.log("Puntos más cercanos:", nearestPoints[0].id_wsid);
+  
+      if (nearestPoints.length > 0) {
+        const id_wsid = nearestPoints[0].id_wsid;
+  
+        // Inicia la transacción
+        await connection.beginTransaction();
+  
+        const [result] = await connection.execute(
+          "INSERT INTO persona (per_nombre, per_appat, per_apmat) VALUES (?, ?, ?)",
+          [data.message.Name, data.message.LastName, data.message.LastName2]
+        );
+        const insertedId = result.insertId;
+        console.log("ID del registro insertado:", insertedId);
+  
+        if (insertedId) {
+          const [result2] = await connection.execute(
+            "INSERT INTO registropaciente (pac_rango, id_per, pac_sexo, pac_edad, pac_padecimiento, id_esp, id_est) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+              data.message.Emergency,
+              insertedId,
+              data.message.Sex,
+              data.message.Age,
+              data.message.Description,
+              1,
+              1,
+            ]
+          );
+          const id = result2.insertId;
+          console.log("ID del registro en registropaciente:", id);
+  
+          if (id) {
+            await connection.execute(
+              "INSERT INTO petresemi (id_pac, id_emi, id_res) VALUES (?, ?, ?)",
+              [id, data.session, id_wsid]
+            );
+          }
+        }
+  
+        // Confirma la transacción
+        await connection.commit();
+      }
+    } catch (error) {
+      console.error("Error al guardar el mensaje:", error);
+  
+      // Revertir la transacción en caso de error
+      await connection.rollback();
+    } finally {
+      connection.release();
+    }
   });
+  
 
   socket.on("accept_message", async (data) => {
     try {
@@ -232,6 +258,21 @@ io.on("connection", (socket) => {
       console.error("Error al aceptar el mensaje:", error);
     }
   });
+  socket.on("denied_message",()=>{
+   
+  })
+  socket.on("arrive_message",async (data)=>{
+    const connection = await pool.getConnection();
+
+    const update = await connection.execute(
+      "UPDATE registropaciente SET id_est = ? WHERE id_pac = ?",
+      [4, data.folio]
+    );
+    connection.release();
+    console.log(update)
+
+    
+  })
 
   socket.on("disconnect", () => {
     console.log("User disconnected");

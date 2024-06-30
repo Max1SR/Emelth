@@ -54,7 +54,7 @@ function GestionPeticiones() {
 
         const rol = session.user.name
         console.log(websocketid)
-          socket.emit('client_id', { client_id: websocketid , rol:rol});
+          socket.emit('client_id', { client_id: websocketid , rol:rol,ws:session.user.email});
       })
     
       const handleReceiveMessage = (data) => {
