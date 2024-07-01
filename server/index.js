@@ -83,11 +83,10 @@ io.on("connection", (socket) => {
           const userid = clientData.id;
         ;
           const [datarows] = await connection.execute(
-            "SELECT * FROM ConNombrewe WHERE id_emi = ?",
+            "SELECT * FROM ConNombrewe WHERE id_emi = ? AND est_estado='en progreso'" ,
             [userid]
           );
           
-            console.log(datarows);
           if (datarows.length > 0) {
             io.to(clientData.client_id).emit("server_requests", datarows);
           }
@@ -245,7 +244,11 @@ io.on("connection", (socket) => {
           const id = idEmisor[0].websocketid;
         }
         console.log(data.session)
-        const [rows] = await connection.execute("SELECT * FROM ConNombrewe WHERE id_emi = ?",
+        const [rows] = await connection.execute(`
+        SELECT *
+        FROM petresemi p
+        JOIN vwencargado e ON p.id_pac = e.Folio
+        WHERE p.id_res = ?;`,
         [data.session]);
         connection.release();
         
@@ -257,12 +260,22 @@ io.on("connection", (socket) => {
       console.error("Error al aceptar el mensaje:", error);
     }
   });
-  socket.on("denied_message",()=>{
-   
+  socket.on("denied_message",async(data)=>{
+    const connection = await pool.getConnection();
+   const folio = data.folio;
+   if (sqlInsert) {
+    const resultaccept = await connection.execute(
+      "UPDATE petresemi SET id_res = ? WHERE id_pac = ?",
+      [16, folio]
+    );
+    
+
+  }
+
+
   })
   socket.on("arrive_message",async (data)=>{
     const connection = await pool.getConnection();
-
     const update = await connection.execute(
       "UPDATE registropaciente SET id_est = ? WHERE id_pac = ?",
       [4, data.folio]

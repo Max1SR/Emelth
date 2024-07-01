@@ -55,6 +55,33 @@ function Accepted() {
     }
   }, [session]);
 
+  const handleConfirmArrival = async (folio) => {
+    try {
+      const response = await axios.post('/api/confirmArrival', { folio })
+      if (response) {
+        const userId = session.user?.email;
+
+        if (userId) {
+          axios.post("/api/acept", { id: userId })
+            .then(res => {
+              let requests = res.data.message;
+              setRequests(requests);
+            })
+            .catch(error => {
+              console.error('Error fetching petitions:', error);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+      } else {
+        alert('Error al confirmar la llegada');
+      }}
+    } catch (error) {
+      console.error('Error confirming arrival:', error);
+      alert('Error al confirmar la llegada');
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen min-w-screen bg-white">
@@ -75,25 +102,32 @@ function Accepted() {
                 <th className="max-md:row-start-3 max-md:col-start-1">Nombre</th>
                 <th className="max-md:row-start-5 max-md:col-start-1">Apellido Paterno</th>
                 <th className="max-md:row-start-7 max-md:col-start-1">Apellido Materno</th>
-             
                 <th className="max-md:row-start-13 max-md:col-start-1">Tipo Emergencia</th>
                 <th className="max-md:row-start-15 max-md:col-start-1">Padecimiento</th>
                 <th className="max-md:row-start-17 max-md:col-start-1">Estado</th>
+                <th className="max-md:row-start-19 max-md:col-start-1">Acción</th>
               </tr>
             </thead>
             <tbody>
               {requests.map((request, index) => (
                 <tr key={index}>
-                    <td>{index}</td>
+                  <td>{index}</td>
                   <td>{request.per_nombre}</td>
                   <td>{request.per_appat}</td>
                   <td>{request.per_apmat}</td>
                   <td>{request.pac_rango}</td>
-
                   <td>{request.pac_padecimiento}</td>
                   <td>{request.est_estado}</td>
-                  
-                
+                  <td>
+                    {request.est_estado === 'Arribó' && (
+                      <button
+                        onClick={() => handleConfirmArrival(request.id_pac)}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Confirmar Arribo
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

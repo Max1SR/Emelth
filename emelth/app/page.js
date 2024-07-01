@@ -97,7 +97,7 @@ function Home() {
         //className={`flex min-h-[calc(100vh-48px)] flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800`}
       >
         
-        {/* <AnimatedBackground changeBlockColor={changeBlockColor} /> */}
+        <AnimatedBackground changeBlockColor={changeBlockColor} />
         <div className=" w-5/6 mb-10 z-10">
           {/* Esto es para web*/}
           <div className="flex flex-col space-y-10 lg:-mt-8">

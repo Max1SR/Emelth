@@ -101,6 +101,7 @@ function GestionPeticiones() {
   const handleReject = (folio) => {
     // Realiza la lógica para rechazar la petición con el folio dado
     console.log(`Rechazar petición con folio: ${folio}`);
+    socket.emit("denied_message",{folio:folio})
   };
   if (loading) {
     return (
