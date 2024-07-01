@@ -102,15 +102,23 @@ export default function SignInSignUp() {
             <span className="text-xl text-slate-900">
               Ingresa tu email y contraseña para iniciar sesión
             </span>
-            <input type="email" placeholder="Email"   value={formData.username}
-                  onChange={(e) =>
-                    setFormData({ ...formData, username: e.target.value })
-                  }/>
-            <input type="password" placeholder="Contraseña"
+            <input
+              type="email"
+              placeholder="Email"
+              value={formData.username}
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+              className="text-gray-900"
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
+              className="text-gray-900"
             />
             <a href="#">Olvidaste tu contraseña?</a>
             <button onClick={handleFormSubmit}>Iniciar Sesión</button>

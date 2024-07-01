@@ -93,7 +93,7 @@ export default function Nosotros() {
             <span className="char">S</span>
           </h1>
         </div>
-        <div className="w-full items-center justify-center grid grid-cols-5">
+        <div className="w-full items-center justify-center grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 overflow-y-auto overflow-x-hidden h-[32rem]">
           <div className="flex flex-col pl-10 mt-5">
             <h1 className="text-white text-4xl font-bold mb-4">Ubicaciones</h1>
             <p className="text-white">
@@ -109,10 +109,7 @@ export default function Nosotros() {
                 onClick={() => openModal(hospital)}
               >
                 <div className="flex flex-1 w-full rounded-lg -mt-4">
-                  <img
-                    className="object-cover"
-                    src={hospital.img}
-                  />
+                  <img className="object-cover" src={hospital.img} />
                 </div>
               </div>
             </PinContainer>

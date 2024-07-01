@@ -93,19 +93,15 @@ function Home() {
   return (
     <Layout>
       <main
-        className={`flex min-h-screen flex-col items-center justify-between -px-8 pt-44 ${inter.className}  text-slate-800 ${colorFondo} `}
+        className={`flex min-h-screen flex-col items-center justify-center -px-8 pt-44 ${inter.className}  text-slate-800 ${colorFondo} `}
         //className={`flex min-h-[calc(100vh-48px)] flex-col items-center justify-between px-16 py-14 ${inter.className} h-full bg-slate-100 text-slate-800`}
       >
-        {/* <div
-          classlist="container"
-          className="z-0 absolute inset-0 "
-          ref={containerRef}
-        ></div> */}
-        <AnimatedBackground changeBlockColor={changeBlockColor} />
+        
+        {/* <AnimatedBackground changeBlockColor={changeBlockColor} /> */}
         <div className=" w-5/6 mb-10 z-10">
-          {/* Esto es para web-Primer div*/}
-          <div className="flex flex-col space-y-10">
-            <div className="hidden lg:flex justify-between 2xl:mb-8 md:mb-20">
+          {/* Esto es para web*/}
+          <div className="flex flex-col space-y-10 lg:-mt-8">
+            <div className="hidden md:flex justify-between 2xl:mb-5 md:mb-8">
               <div className="space-y-5 w-6/12 flex flex-col justify-center">
                 <div>
                   <p className="md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl mb-2 font-bold text-slate-100 ">
@@ -116,21 +112,17 @@ function Home() {
                   </p>
                 </div>
 
-                <p className="w-10/12 md:text-xs lg:text-sm xl:text-base text-slate-100">
+                <p className="w-10/12 md:text-sm  xl:text-base text-slate-100">
                   {textoPt}
                 </p>
-                {/* <button className="bg-green-400 p-2 px-4 items-center rounded-2xl w-32 mx-auto">
-                  Hospitales{" "}
-                </button> */}
               </div>
-              {/* <div className="min-h-96 min-w-72 h-1/5 w-2/4 bg-slate-600 rounded-lg"></div> */}
 
               <img
-                className="h-5/12 w-4/12 object-contain min-h-14 min-w-14"
+                className="h-3/12 w-6/12 object-cover min-w-14 max-w-[500px]"
                 src={imgDemos}
               ></img>
             </div>
-            <div className="hidden lg:flex space-x-10 justify-center">
+            <div className="hidden md:flex space-x-10 justify-center">
               <button
                 onClick={() => cambiarTexto(1)}
                 className="h-12 w-12 hover:-translate-y-5 ease-out duration-500"
@@ -154,32 +146,48 @@ function Home() {
           {/* Cierra web */}
 
           {/* Esto es para movil-Primer div*/}
-          <div className=" justify-between flex flex-col lg:hidden -mx-16 mb-20">
-            <div className="w-full space-y-5  flex flex-col items-center mb-14">
-              <div className="flex flex-col items-center">
-                <p className="text-5xl  mb-2 font-semibold text-slate-700 text-center">
-                  Emerald Health
-                </p>
-                <p className=" ml-0.5 font-semibold text-slate-600 text-xl ">
-                  Emelth
+          <div className=" flex flex-col md:hidden -mt-[4rem] justify-center">
+            <div className="justify-between flex flex-col-reverse items-center">
+              <div className="space-y-5 w-full flex flex-col items-center">
+                <div>
+                  <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-2 font-bold text-slate-100 text-center">
+                    {textoH}
+                  </p>
+                  <p className="-mx-2 font-bold text-slate-100 text-3xl sm:text-4xl md:text-5xl lg:text-6xl ">
+                    {textoPe}
+                  </p>
+                </div>
+
+                <p className="w-11/12 text-sm md:text-base lg:text-lg text-slate-100 text-center ">
+                  {textoPt}
                 </p>
               </div>
 
-              <p className="text-x text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                scelerisque pellentesque urna vel feugiat. Cras euismod
-                hendrerit ligula, ut commodo massa volutpat eu. Donec at viverra
-                nibh.{" "}
-              </p>
-              <button className="bg-green-400 p-2 px-4 items-center rounded-2xl w-32 mx-auto">
-                Registrarse
+              <img
+                className="h-full w-6/12 object-cover min-h-60 min-w-52"
+                src={imgDemos}
+              ></img>
+            </div>
+            <div className="space-x-10 justify-center mt-10 flex ">
+              <button
+                onClick={() => cambiarTexto(1)}
+                className="h-12 w-12 hover:-translate-y-5 ease-out duration-500"
+              >
+                <img src="/img/—Pngtree—3d cute icon element ambulance_14132745 (1).png"></img>
+              </button>
+              <button
+                onClick={() => cambiarTexto(2)}
+                className="h-12 w-12 hover:-translate-y-5 ease-out duration-500"
+              >
+                <img src="/img/Healthcare@2x.webp"></img>
+              </button>
+              <button
+                onClick={() => cambiarTexto(3)}
+                className="h-12 w-12 hover:-translate-y-5 ease-out duration-500"
+              >
+                <img src="/img/—Pngtree—3dc4d three-dimensional medical mobile terminal_8636386 (1).png"></img>
               </button>
             </div>
-
-            <img
-              className="w-full h-72 object-cover rounded-lg"
-              src="https://img.freepik.com/vector-premium/coche-ambulancia-fondo-blanco-aislado-vehiculo-emergencia-ilustracion-vectorial-estilo-dibujos-animados_165429-1220.jpg"
-            ></img>
           </div>
         </div>
       </main>
