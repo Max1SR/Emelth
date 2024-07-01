@@ -45,12 +45,7 @@ function Homepage() {
         <section id="principal" class="main">
           <div class="topbar">
             {/* <!--Busqueda--> */}
-            <div class="search">
-              <label>
-                <input type="text" placeholder="Search here" />
-                <ion-icon name="search-outline"></ion-icon>
-              </label>
-            </div>
+            
             {/* <!--Imagen de Perfil--> */}
             {/* <div class="user">
               <img src="assets/user.jpg" />
@@ -62,7 +57,7 @@ function Homepage() {
             <div class="recentpetitions">
               <div class="cardHeader">
                 <h2>Peticiones Recientes</h2>
-                <a href="#peticiones" class="btn">
+                <a href="/historialEmergencias" class="btn">
                   Ver todo
                 </a>
               </div>

@@ -344,6 +344,15 @@ body {
   background-size: 400% 400%;
 }
 
+.btnGraddient {
+  background: var(--gradient);
+  text-decoration: none;
+  border-radius: 6px;
+  animation: gradient 5s ease infinite;
+  background-attachment: fixed;
+  background-size: 400% 400%;
+}
+
 .details table {
   width: 100%;
   border-collapse: collapse;
@@ -883,7 +892,6 @@ body {
   background-size: 400% 400%;
 }
 
-
 /* width */
 .scrollH::-webkit-scrollbar {
   width: 10px;
@@ -891,25 +899,23 @@ body {
 }
 
 /* Track */
- .scrollH::-webkit-scrollbar-track {
+.scrollH::-webkit-scrollbar-track {
   background: #ffff;
 }
 
 /* Handle */
- .scrollH::-webkit-scrollbar-thumb {
+.scrollH::-webkit-scrollbar-thumb {
   background: #e53a76;
   border-radius: 10px;
 }
 
 /* Handle on hover */
- .scrollH::-webkit-scrollbar-thumb:hover {
+.scrollH::-webkit-scrollbar-thumb:hover {
   background: var(--gradient);
   animation: gradient 5s ease infinite;
   background-attachment: fixed;
   background-size: 400% 400%;
 }
-
-
 
 .peticiones table {
   width: 100%;
