@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Escudo from "../iconos/escudo";
 
-import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
+import {  useState } from "react";
+import { Dialog } from "@headlessui/react";
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -15,7 +15,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  ChevronDownIcon,
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
@@ -52,10 +51,7 @@ const products = [
     icon: ArrowPathIcon,
   },
 ];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -64,15 +60,15 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="bg-white shadow text-slate-600 fixed w-full"
+    <header className="bg-white shadow text-slate-600 fixed w-full rounded-b-3xl "
     //className="bg-white shadow text-slate-600"
     >
-      <div className="flex h-16 justify-between items-center px-10">
+      <div className="flex h-14 justify-between items-center px-10">
         <a href="/">
           <Escudo className="h-6 w-6"></Escudo>
         </a>
         {/* Lo siguiente muestra el icono de mdesplegar menu debido al lg:hidden ya que nos esta mencionandop que apartir de 1024px se esconde */}
-        <div className="flex lg:hidden">
+        <div className="flex md:hidden">
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -82,7 +78,7 @@ export default function Header() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className=" items-center hidden lg:flex justify-between ">
+        <div className=" items-center hidden md:flex justify-between ">
           <div className="justify-between items-center">
             <Link
               className="text-slate-600 mx-6  hover:text-sky-500 transition-colors"
@@ -122,7 +118,7 @@ export default function Header() {
 
       <Dialog
         as="div"
-        className="lg:hidden"
+        className="md:hidden"
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
@@ -130,7 +126,7 @@ export default function Header() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Emelth</span>
               <Escudo></Escudo>
             </a>
             <button

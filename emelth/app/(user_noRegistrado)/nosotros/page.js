@@ -1,15 +1,90 @@
 "use client";
-import React, { useState } from "react";
-import { Inter } from "next/font/google";
+
+import React, { useState, useRef, useEffect } from "react";
+import { Asap_Condensed, Inter } from "next/font/google";
 import Layout from "@/components/components_usu_no_registrado/layout";
 import "@/styles/styles.css";
-//import '@dotlottie/player-component';
 import { Player } from "@lottiefiles/react-lottie-player";
 import BubbleBackground from "@/components/bubbleBackgrund";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Nosotros() {
+  const slideRefs = useRef([]);
+  const btnRefs = useRef([]);
+
+  useEffect(() => {
+    let currentSlide = 0;
+
+    // Javascript for image slider manual navigation
+    const manualNav = (manual) => {
+      slideRefs.current.forEach((slide, i) => {
+        if (slide) {
+          slide.classList.remove("activo");
+        }
+        if (btnRefs.current[i]) {
+          btnRefs.current[i].classList.remove("activo");
+        }
+        if (i === manual) {
+          if (slide) {
+            slide.classList.add("activo");
+          }
+          if (btnRefs.current[i]) {
+            btnRefs.current[i].classList.add("activo");
+          }
+        }
+      });
+    };
+
+    btnRefs.current.forEach((btn, i) => {
+      if (btn) {
+        btn.addEventListener("click", () => {
+          manualNav(i);
+          currentSlide = i;
+        });
+      }
+    });
+
+    // Javascript for image slider autoplay navigation
+    const repeat = () => {
+      let i = 0;
+      const repeater = () => {
+        setTimeout(() => {
+          const activo = document.getElementsByClassName("activo");
+          [...activo].forEach((activoSlide) => {
+            activoSlide.classList.remove("activo");
+          });
+          if (slideRefs.current[i]) {
+            slideRefs.current[i].classList.add("activo");
+          }
+          if (btnRefs.current[i]) {
+            btnRefs.current[i].classList.add("activo");
+          }
+          i++;
+          if (i === slideRefs.current.length) {
+            i = 0;
+          }
+          if (i < slideRefs.current.length) {
+            repeater();
+          }
+        }, 10000);
+      };
+      repeater();
+    };
+    repeat();
+
+    // Clean up event listeners on component unmount
+    return () => {
+      btnRefs.current.forEach((btn, i) => {
+        if (btn) {
+          btn.removeEventListener("click", () => {
+            manualNav(i);
+            currentSlide = i;
+          });
+        }
+      });
+    };
+  }, []);
 
   return (
     <Layout>
@@ -20,7 +95,10 @@ export default function Nosotros() {
           <BubbleBackground />
         </div>
         <div className="img-slider z-10">
-          <div className="slide activo">
+          <div
+            className="slide activo"
+            ref={(el) => (slideRefs.current[0] = el)}
+          >
             <img src="1.jpg" alt="" />
             <div className="info">
               <h2>Nuestra Misión</h2>
@@ -44,7 +122,7 @@ export default function Nosotros() {
               autoplay
             ></Player>
           </div>
-          <div className="slide">
+          <div className="slide" ref={(el) => (slideRefs.current[1] = el)}>
             <img src="2.jpg" alt="" />
             <div className="info">
               <h2>Nuestra Visión</h2>
@@ -67,7 +145,7 @@ export default function Nosotros() {
               autoplay
             ></Player>
           </div>
-          <div className="slide">
+          <div className="slide" ref={(el) => (slideRefs.current[2] = el)}>
             <img src="3.jpg" alt="" />
             <div className="info">
               <h2>Innovación que cura</h2>
@@ -89,7 +167,7 @@ export default function Nosotros() {
               autoplay
             ></Player>
           </div>
-          <div className="slide">
+          <div className="slide" ref={(el) => (slideRefs.current[3] = el)}>
             <img src="4.jpg" alt="" />
             <div className="info">
               <h2>Ubicando la ayuda</h2>
@@ -120,7 +198,7 @@ export default function Nosotros() {
               autoplay
             ></Player>
           </div>
-          <div className="slide">
+          <div className="slide" ref={(el) => (slideRefs.current[4] = el)}>
             <img src="5.jpg" alt="" />
             <div className="info">
               <h2>Mirando hacia el Futuro</h2>
@@ -144,11 +222,26 @@ export default function Nosotros() {
             </div>
           </div>
           <div className="navigation">
-            <div className="btn-slide activo"></div>
-            <div className="btn-slide"></div>
-            <div className="btn-slide"></div>
-            <div className="btn-slide"></div>
-            <div className="btn-slide"></div>
+            <div
+              className="btn-slide activo"
+              ref={(el) => (btnRefs.current[0] = el)}
+            ></div>
+            <div
+              className="btn-slide"
+              ref={(el) => (btnRefs.current[1] = el)}
+            ></div>
+            <div
+              className="btn-slide"
+              ref={(el) => (btnRefs.current[2] = el)}
+            ></div>
+            <div
+              className="btn-slide"
+              ref={(el) => (btnRefs.current[3] = el)}
+            ></div>
+            <div
+              className="btn-slide"
+              ref={(el) => (btnRefs.current[4] = el)}
+            ></div>
           </div>
         </div>
       </main>
