@@ -244,11 +244,11 @@ io.on("connection", (socket) => {
           );
           const id = idEmisor[0].websocketid;
         }
-
+        console.log(data.session)
         const [rows] = await connection.execute("SELECT * FROM ConNombrewe WHERE id_emi = ?",
         [data.session]);
         connection.release();
-
+        
         socket.emit("server_requests", rows);
       }
 
