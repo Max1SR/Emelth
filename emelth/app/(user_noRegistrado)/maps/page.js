@@ -121,7 +121,7 @@ export default function Nosotros() {
           <div className="modal-box w-11/12 max-w-5xl">
             {selectedHospital ? (
               <>
-                <h2 className="font-bold text-lg">{selectedHospital.name}</h2>
+                <h2 className="font-bold text-lg text-slate-300">{selectedHospital.name}</h2>
                 <iframe
                   src={selectedHospital.mapUrl}
                   allowFullScreen
@@ -136,7 +136,7 @@ export default function Nosotros() {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button, it will close the modal */}
-                <button className="btn">Close</button>
+                <button className="btn">Cerrar</button>
               </form>
             </div>
           </div>
