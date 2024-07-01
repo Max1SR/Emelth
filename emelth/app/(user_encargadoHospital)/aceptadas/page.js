@@ -88,12 +88,12 @@ function Accepted() {
                   <td>{request.per_nombre}</td>
                   <td>{request.per_appat}</td>
                   <td>{request.per_apmat}</td>
-                
+                  <td>{request.pac_rango}</td>
+
                   <td>{request.pac_padecimiento}</td>
                   <td>{request.est_estado}</td>
-                  <td>{request.Emergency}</td>
-                  <td>{request.Description}</td>
-                  <td>{request.Estate}</td>
+                  
+                
                 </tr>
               ))}
             </tbody>

@@ -243,13 +243,12 @@ io.on("connection", (socket) => {
             [resultemi[0].id_emi]
           );
           const id = idEmisor[0].websocketid;
-          console.log(id);
         }
 
-        const [rows] = await connection.execute("SELECT * FROM vwencargado");
+        const [rows] = await connection.execute("SELECT * FROM ConNombrewe WHERE id_emi = ?",
+        [data.session]);
         connection.release();
 
-        socket.broadcast.emit("server_requests", rows);
         socket.emit("server_requests", rows);
       }
 
